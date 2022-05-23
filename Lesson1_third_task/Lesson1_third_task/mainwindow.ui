@@ -86,19 +86,6 @@
      <string>Insert_html</string>
     </property>
    </widget>
-   <widget class="QLabel" name="debug">
-    <property name="geometry">
-     <rect>
-      <x>80</x>
-      <y>240</y>
-      <width>451</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
    <widget class="QCommandLinkButton" name="insert_b">
     <property name="geometry">
      <rect>
@@ -109,7 +96,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>CommandLinkButton</string>
+     <string>insert</string>
     </property>
    </widget>
   </widget>

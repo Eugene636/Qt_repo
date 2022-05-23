@@ -16,10 +16,6 @@ MainWindow::~MainWindow()
     delete ui;
 }
 void MainWindow::append_b_clicked () {
-    static int counter = 0;
-    counter++;
-    QString d = "append_b" + QString::number(counter);
-    ui->debug->setText(d);
     QString s = ui->appending_t->toPlainText();
     QString s2 = ui->Inserting_t->toPlainText();
     s += s2;
@@ -27,16 +23,8 @@ void MainWindow::append_b_clicked () {
 }
 
 void MainWindow::insert_b_clicked () {
-    static int counter = 0;
-    counter++;
-    QString d = "insert_b" + QString::number(counter);
-    ui->debug->setText(d);
     ui->Inserting_t->setText(ui->appending_t->toPlainText());
 }
 void MainWindow::insert_html_b_clicked (){
-    static int counter = 0;
-    counter++;
-    QString d = "htmp_b" + QString::number(counter);
-    ui->debug->setText(d);
-    ui->appending_t->setHtml("<fontcolor='red'>Hello</font> ");
+    ui->appending_t->setHtml("<font color=\"red\">Hello</font>");
 }

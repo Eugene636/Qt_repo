@@ -32,7 +32,6 @@ public:
     QLabel *label_2;
     QPushButton *append_b;
     QPushButton *insert_html_b;
-    QLabel *debug;
     QCommandLinkButton *insert_b;
     QMenuBar *menubar;
     QStatusBar *statusbar;
@@ -62,9 +61,6 @@ public:
         insert_html_b = new QPushButton(centralwidget);
         insert_html_b->setObjectName(QString::fromUtf8("insert_html_b"));
         insert_html_b->setGeometry(QRect(238, 160, 101, 25));
-        debug = new QLabel(centralwidget);
-        debug->setObjectName(QString::fromUtf8("debug"));
-        debug->setGeometry(QRect(80, 240, 451, 17));
         insert_b = new QCommandLinkButton(centralwidget);
         insert_b->setObjectName(QString::fromUtf8("insert_b"));
         insert_b->setGeometry(QRect(410, 150, 177, 41));
@@ -89,8 +85,7 @@ public:
         label_2->setText(QApplication::translate("MainWindow", "Inserting", nullptr));
         append_b->setText(QApplication::translate("MainWindow", "append", nullptr));
         insert_html_b->setText(QApplication::translate("MainWindow", "Insert_html", nullptr));
-        debug->setText(QString());
-        insert_b->setText(QApplication::translate("MainWindow", "CommandLinkButton", nullptr));
+        insert_b->setText(QApplication::translate("MainWindow", "insert", nullptr));
     } // retranslateUi
 
 };

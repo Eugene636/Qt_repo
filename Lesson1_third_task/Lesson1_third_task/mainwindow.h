@@ -18,7 +18,7 @@ public:
 private:
     Ui::MainWindow *ui;
 private slots:
-    void insert_b_clicked ();
+    void insert_b_clicked ();//названия отличаются от автоматических наименований слотов
     void append_b_clicked();
     void insert_html_b_clicked ();
 };
