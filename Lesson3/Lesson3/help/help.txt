@@ -1,0 +1,1 @@
+This is text editor. It is a liitle more comfortable than echo utility. It has intuitive interface
