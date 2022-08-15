@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
+/*Основное меню. Содержит среди членов класса объекты диалоговых меню
+ это сделано для сохранения результатов перевода */
 #include "choosekeys.h"
 #include "help.h"
 #include "keys.h"

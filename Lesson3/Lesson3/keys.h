@@ -1,7 +1,8 @@
 #ifndef KEYS_H
 #define KEYS_H
 #include <Qt>
-
+/*класс Keys для обработки горячих клавиш. нужен в основном для проверки
+ * отсутствия совпадений в комбинациях клавиш - это делают сеттеры*/
 struct KeyShortcut {
   Qt::Key key_code;
   Qt::KeyboardModifier key_modifier;
