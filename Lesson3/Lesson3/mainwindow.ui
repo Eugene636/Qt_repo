@@ -29,7 +29,7 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>91</width>
+      <width>81</width>
       <height>31</height>
      </rect>
     </property>
@@ -42,7 +42,7 @@
      <rect>
       <x>90</x>
       <y>0</y>
-      <width>101</width>
+      <width>91</width>
       <height>31</height>
      </rect>
     </property>
@@ -53,9 +53,9 @@
    <widget class="QPushButton" name="help_button">
     <property name="geometry">
      <rect>
-      <x>270</x>
+      <x>350</x>
       <y>0</y>
-      <width>91</width>
+      <width>101</width>
       <height>31</height>
      </rect>
     </property>
@@ -68,7 +68,7 @@
      <rect>
       <x>720</x>
       <y>0</y>
-      <width>41</width>
+      <width>31</width>
       <height>31</height>
      </rect>
     </property>
@@ -92,40 +92,40 @@
    <widget class="QPushButton" name="r_only_button">
     <property name="geometry">
      <rect>
-      <x>360</x>
+      <x>470</x>
       <y>0</y>
-      <width>89</width>
+      <width>101</width>
       <height>31</height>
      </rect>
     </property>
     <property name="text">
-     <string>read_open</string>
+     <string>readOpen</string>
     </property>
    </widget>
    <widget class="QPushButton" name="save_as_button">
     <property name="geometry">
      <rect>
-      <x>190</x>
+      <x>188</x>
       <y>0</y>
-      <width>89</width>
+      <width>141</width>
       <height>31</height>
      </rect>
     </property>
     <property name="text">
-     <string>save as</string>
+     <string>saveAs</string>
     </property>
    </widget>
    <widget class="QPushButton" name="hot_keys_button">
     <property name="geometry">
      <rect>
-      <x>450</x>
+      <x>588</x>
       <y>0</y>
-      <width>89</width>
+      <width>111</width>
       <height>31</height>
      </rect>
     </property>
     <property name="text">
-     <string>hot keys</string>
+     <string>hotKeys</string>
     </property>
    </widget>
   </widget>

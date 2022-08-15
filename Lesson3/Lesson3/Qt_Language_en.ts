@@ -4,23 +4,41 @@
 <context>
     <name>ChooseKeys</name>
     <message>
-        <location filename="choosekeys.ui" line="13"/>
+        <location filename="choosekeys.ui" line="14"/>
+        <location filename="choosekeys.cpp" line="77"/>
         <source>Dialog</source>
-        <translation type="unfinished">Help</translation>
+        <translation>СhooseKeys</translation>
+    </message>
+    <message>
+        <location filename="choosekeys.ui" line="26"/>
+        <source>save as</source>
+        <translation>saveAs</translation>
+    </message>
+    <message>
+        <location filename="choosekeys.ui" line="39"/>
+        <source>save</source>
+        <translation>save</translation>
+    </message>
+    <message>
+        <location filename="choosekeys.ui" line="52"/>
+        <source>open</source>
+        <translation>open</translation>
+    </message>
+    <message>
+        <location filename="choosekeys.ui" line="65"/>
+        <source>quit</source>
+        <translation>quit</translation>
+    </message>
+    <message>
+        <location filename="choosekeys.ui" line="88"/>
+        <source>save keys</source>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>Dialog</name>
     <message>
         <location filename="help.ui" line="14"/>
-        <source>Dialog</source>
-        <translation>Help</translation>
-    </message>
-</context>
-<context>
-    <name>Help</name>
-    <message>
-        <location filename="help.cpp" line="17"/>
         <source>Dialog</source>
         <translation type="unfinished">Help</translation>
     </message>
@@ -30,7 +48,7 @@
     <message>
         <location filename="mainwindow.ui" line="14"/>
         <source>MainWindow</source>
-        <translation>Text edit</translation>
+        <translation>Text Edit</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="37"/>
@@ -45,7 +63,7 @@
     <message>
         <location filename="mainwindow.ui" line="63"/>
         <source>help</source>
-        <translation>help</translation>
+        <translation>Help</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="76"/>
@@ -59,13 +77,18 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="102"/>
-        <source>read_open</source>
-        <translation type="unfinished"></translation>
+        <source>readOpen</source>
+        <translation>read</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="115"/>
-        <source>save as</source>
-        <translation type="unfinished"></translation>
+        <source>saveAs</source>
+        <translation>saveAs</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="128"/>
+        <source>hotKeys</source>
+        <translation>HotKeys</translation>
     </message>
 </context>
 </TS>

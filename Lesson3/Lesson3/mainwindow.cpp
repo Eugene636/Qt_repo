@@ -1,5 +1,4 @@
 #include "mainwindow.h"
-#include "choosekeys.h"
 #include "help.h"
 #include "ui_mainwindow.h"
 #include <QDir>
@@ -9,7 +8,8 @@
 #include <QTextStream>
 #include <QtWidgets>
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent), ui(new Ui::MainWindow), hot_keys_() {
+    : QMainWindow(parent), hot_keys_(), choose_keys_(&hot_keys_, this),
+      d_(this), ui(new Ui::MainWindow) {
   ui->setupUi(this);
   error_ = new QErrorMessage;
   directory_ = new QDir;
@@ -23,9 +23,9 @@ MainWindow::MainWindow(QWidget *parent)
           &MainWindow::save_as);
   connect(ui->hot_keys_button, &QPushButton::clicked, this,
           &MainWindow::setHotKeys);
-  Help d(this);
   this->switchLanguage("en");
-  d.translate("en");
+  choose_keys_.translate("en");
+  d_.translate("en");
   ui->centralwidget->setFocusPolicy(Qt::StrongFocus);
 }
 MainWindow::~MainWindow() {
@@ -68,6 +68,7 @@ void MainWindow::switchLanguage(const QString &language) {
   qApp->installTranslator(&translator);
   ui->retranslateUi(this);
   d_.translate(language);
+  choose_keys_.translate(language);
 }
 
 void MainWindow::on_help_button_clicked() {
@@ -134,10 +135,7 @@ void MainWindow::read_open() {
   ui->opened->setPlainText(file_read(s));
   ui->opened->setReadOnly(true);
 }
-void MainWindow::exit() {
-  ui->opened->setPlainText("Exit");
-  this->close();
-}
+void MainWindow::exit() { this->close(); }
 
 void MainWindow::keyPressEvent(QKeyEvent *event) {
   if ((event->modifiers() == hot_keys_.getCodeKeyCreate().key_modifier) &&
@@ -154,7 +152,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event) {
     exit();
 }
 void MainWindow::setHotKeys() {
-  ChooseKeys choose_keys(&hot_keys_, this);
-  choose_keys.exec();
+  choose_keys_.exec();
   hot_keys_.writeKeysToFile();
 }

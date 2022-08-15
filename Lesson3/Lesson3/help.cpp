@@ -14,5 +14,5 @@ void Help::translate(const QString &language) {
   QTranslator translator;
   translator.load("Qt_Language_" + language);
   qApp->installTranslator(&translator);
-  setWindowTitle(tr("Dialog"));
+  ui->retranslateUi(this);
 }

@@ -1,6 +1,7 @@
 #include "choosekeys.h"
 #include "ui_choosekeys.h"
 #include <QDebug>
+#include <QTranslator>
 
 ChooseKeys::ChooseKeys(Keys *hot_keys, QWidget *parent)
     : QDialog(parent), ui(new Ui::ChooseKeys), hot_keys_(hot_keys) {
@@ -68,4 +69,10 @@ void ChooseKeys::keyPressEvent(QKeyEvent *event) {
   if (ui->quit->isChecked())
     hot_keys_->setCodeKeyExit(change_keys(event));
   keysForUser();
+}
+void ChooseKeys::translate(const QString &language) {
+  QTranslator translator;
+  translator.load("Qt_Language_" + language);
+  qApp->installTranslator(&translator);
+  ui->retranslateUi(this);
 }

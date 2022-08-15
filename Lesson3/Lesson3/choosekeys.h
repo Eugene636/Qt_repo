@@ -14,6 +14,7 @@ class ChooseKeys : public QDialog {
 public:
   explicit ChooseKeys(Keys *, QWidget *parent = nullptr);
   ~ChooseKeys();
+  void translate(const QString &);
 
 protected:
   virtual void keyPressEvent(QKeyEvent *event) override;

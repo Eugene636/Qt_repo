@@ -1,9 +1,10 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "choosekeys.h"
 #include "help.h"
+#include "keys.h"
 #include <QMainWindow>
-#include <keys.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -53,5 +54,6 @@ private:
   // QPushButton *eng_button_{};
   Ui::MainWindow *ui;
   Help d_;
+  ChooseKeys choose_keys_;
 };
 #endif // MAINWINDOW_H

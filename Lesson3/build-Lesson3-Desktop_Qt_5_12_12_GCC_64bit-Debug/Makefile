@@ -57,7 +57,6 @@ SOURCES       = ../Lesson3/choosekeys.cpp \
 		../Lesson3/keys.cpp \
 		../Lesson3/main.cpp \
 		../Lesson3/mainwindow.cpp qrc_help.cpp \
-		qrc_keys.cpp \
 		moc_choosekeys.cpp \
 		moc_help.cpp \
 		moc_mainwindow.cpp
@@ -67,7 +66,6 @@ OBJECTS       = choosekeys.o \
 		main.o \
 		mainwindow.o \
 		qrc_help.o \
-		qrc_keys.o \
 		moc_choosekeys.o \
 		moc_help.o \
 		moc_mainwindow.o
@@ -479,8 +477,7 @@ Makefile: ../Lesson3/Lesson3.pro /opt/Qt5.12.12/5.12.12/gcc_64/mkspecs/linux-g++
 		/opt/Qt5.12.12/5.12.12/gcc_64/mkspecs/features/yacc.prf \
 		/opt/Qt5.12.12/5.12.12/gcc_64/mkspecs/features/lex.prf \
 		../Lesson3/Lesson3.pro \
-		../Lesson3/help.qrc \
-		../Lesson3/keys.qrc
+		../Lesson3/help.qrc
 	$(QMAKE) -o Makefile ../Lesson3/Lesson3.pro -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug
 /opt/Qt5.12.12/5.12.12/gcc_64/mkspecs/features/spec_pre.prf:
 /opt/Qt5.12.12/5.12.12/gcc_64/mkspecs/common/unix.conf:
@@ -678,7 +675,6 @@ Makefile: ../Lesson3/Lesson3.pro /opt/Qt5.12.12/5.12.12/gcc_64/mkspecs/linux-g++
 /opt/Qt5.12.12/5.12.12/gcc_64/mkspecs/features/lex.prf:
 ../Lesson3/Lesson3.pro:
 ../Lesson3/help.qrc:
-../Lesson3/keys.qrc:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ../Lesson3/Lesson3.pro -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug
 
@@ -693,7 +689,7 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../Lesson3/help.qrc ../Lesson3/keys.qrc $(DISTDIR)/
+	$(COPY_FILE) --parents ../Lesson3/help.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /opt/Qt5.12.12/5.12.12/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../Lesson3/choosekeys.h ../Lesson3/help.h ../Lesson3/keys.h ../Lesson3/mainwindow.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../Lesson3/choosekeys.cpp ../Lesson3/help.cpp ../Lesson3/keys.cpp ../Lesson3/main.cpp ../Lesson3/mainwindow.cpp $(DISTDIR)/
@@ -722,18 +718,13 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all: qrc_help.cpp qrc_keys.cpp
+compiler_rcc_make_all: qrc_help.cpp
 compiler_rcc_clean:
-	-$(DEL_FILE) qrc_help.cpp qrc_keys.cpp
+	-$(DEL_FILE) qrc_help.cpp
 qrc_help.cpp: ../Lesson3/help.qrc \
 		/opt/Qt5.12.12/5.12.12/gcc_64/bin/rcc \
 		../Lesson3/help/help.txt
 	/opt/Qt5.12.12/5.12.12/gcc_64/bin/rcc -name help ../Lesson3/help.qrc -o qrc_help.cpp
-
-qrc_keys.cpp: ../Lesson3/keys.qrc \
-		/opt/Qt5.12.12/5.12.12/gcc_64/bin/rcc \
-		../Lesson3/keys/keys.txt
-	/opt/Qt5.12.12/5.12.12/gcc_64/bin/rcc -name keys ../Lesson3/keys.qrc -o qrc_keys.cpp
 
 compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
@@ -965,11 +956,10 @@ moc_help.cpp: ../Lesson3/help.h \
 	/opt/Qt5.12.12/5.12.12/gcc_64/bin/moc $(DEFINES) --include /home/hugo/Documents/Qt_exp/Lesson1_home_task/Lesson3/build-Lesson3-Desktop_Qt_5_12_12_GCC_64bit-Debug/moc_predefs.h -I/opt/Qt5.12.12/5.12.12/gcc_64/mkspecs/linux-g++ -I/home/hugo/Documents/Qt_exp/Lesson1_home_task/Lesson3/Lesson3 -I/opt/Qt5.12.12/5.12.12/gcc_64/include -I/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets -I/opt/Qt5.12.12/5.12.12/gcc_64/include/QtGui -I/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../Lesson3/help.h -o moc_help.cpp
 
 moc_mainwindow.cpp: ../Lesson3/mainwindow.h \
-		../Lesson3/help.h \
-		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/QDialog \
-		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qdialog.h \
-		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
-		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtGui/qtguiglobal.h \
+		../Lesson3/choosekeys.h \
+		../Lesson3/keys.h \
+		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/Qt \
+		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qnamespace.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qglobal.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qconfig-bootstrapped.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qconfig.h \
@@ -991,12 +981,15 @@ moc_mainwindow.cpp: ../Lesson3/mainwindow.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qmutex.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qnumeric.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qversiontagging.h \
+		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/QDialog \
+		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qdialog.h \
+		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
+		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtGui/qtguiglobal.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtGui/qtgui-config.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qtwidgets-config.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qwidget.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtGui/qwindowdefs.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qobjectdefs.h \
-		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qnamespace.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qobjectdefs_impl.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtGui/qwindowdefs_win.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qobject.h \
@@ -1070,12 +1063,11 @@ moc_mainwindow.cpp: ../Lesson3/mainwindow.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qfiledevice.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtGui/qvector2d.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtGui/qtouchdevice.h \
+		../Lesson3/help.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/QMainWindow \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qmainwindow.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qtabwidget.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtGui/qicon.h \
-		../Lesson3/keys.h \
-		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/Qt \
 		moc_predefs.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/bin/moc
 	/opt/Qt5.12.12/5.12.12/gcc_64/bin/moc $(DEFINES) --include /home/hugo/Documents/Qt_exp/Lesson1_home_task/Lesson3/build-Lesson3-Desktop_Qt_5_12_12_GCC_64bit-Debug/moc_predefs.h -I/opt/Qt5.12.12/5.12.12/gcc_64/mkspecs/linux-g++ -I/home/hugo/Documents/Qt_exp/Lesson1_home_task/Lesson3/Lesson3 -I/opt/Qt5.12.12/5.12.12/gcc_64/include -I/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets -I/opt/Qt5.12.12/5.12.12/gcc_64/include/QtGui -I/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../Lesson3/mainwindow.h -o moc_mainwindow.cpp
@@ -1246,7 +1238,9 @@ choosekeys.o: ../Lesson3/choosekeys.cpp ../Lesson3/choosekeys.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtGui/qicon.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/QRadioButton \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qradiobutton.h \
-		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/QDebug
+		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/QDebug \
+		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/QTranslator \
+		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qtranslator.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o choosekeys.o ../Lesson3/choosekeys.cpp
 
 help.o: ../Lesson3/help.cpp ../Lesson3/help.h \
@@ -1401,13 +1395,8 @@ keys.o: ../Lesson3/keys.cpp ../Lesson3/keys.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qmutex.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qnumeric.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qversiontagging.h \
-		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/QFile \
-		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qfile.h \
-		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qfiledevice.h \
-		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qiodevice.h \
-		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qobject.h \
-		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qobjectdefs.h \
-		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/QDir \
+		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qdir.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstring.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qchar.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qbytearray.h \
@@ -1417,6 +1406,13 @@ keys.o: ../Lesson3/keys.cpp ../Lesson3/keys.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstringalgorithms.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstringview.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qstringbuilder.h \
+		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qfileinfo.h \
+		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qfile.h \
+		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qfiledevice.h \
+		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qiodevice.h \
+		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qobject.h \
+		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qobjectdefs.h \
+		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qobjectdefs_impl.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qlist.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qalgorithms.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qiterator.h \
@@ -1432,28 +1428,28 @@ keys.o: ../Lesson3/keys.cpp ../Lesson3/keys.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qvarlengtharray.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qcontainerfwd.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qobject_impl.h \
+		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qshareddata.h \
+		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qhash.h \
+		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/QFile \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/QTextStream \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qtextstream.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qlocale.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qvariant.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qmap.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qdebug.h \
-		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qhash.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qvector.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qpoint.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qset.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qcontiguouscache.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qsharedpointer.h \
-		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qshareddata.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qsharedpointer_impl.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o keys.o ../Lesson3/keys.cpp
 
 main.o: ../Lesson3/main.cpp ../Lesson3/mainwindow.h \
-		../Lesson3/help.h \
-		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/QDialog \
-		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qdialog.h \
-		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
-		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtGui/qtguiglobal.h \
+		../Lesson3/choosekeys.h \
+		../Lesson3/keys.h \
+		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/Qt \
+		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qnamespace.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qglobal.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qconfig-bootstrapped.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qconfig.h \
@@ -1475,12 +1471,15 @@ main.o: ../Lesson3/main.cpp ../Lesson3/mainwindow.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qmutex.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qnumeric.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qversiontagging.h \
+		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/QDialog \
+		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qdialog.h \
+		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
+		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtGui/qtguiglobal.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtGui/qtgui-config.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qtwidgets-config.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qwidget.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtGui/qwindowdefs.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qobjectdefs.h \
-		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qnamespace.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qobjectdefs_impl.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtGui/qwindowdefs_win.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qobject.h \
@@ -1554,12 +1553,11 @@ main.o: ../Lesson3/main.cpp ../Lesson3/mainwindow.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qfiledevice.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtGui/qvector2d.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtGui/qtouchdevice.h \
+		../Lesson3/help.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/QMainWindow \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qmainwindow.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qtabwidget.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtGui/qicon.h \
-		../Lesson3/keys.h \
-		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/Qt \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/QApplication \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qapplication.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qcoreapplication.h \
@@ -1917,11 +1915,10 @@ main.o: ../Lesson3/main.cpp ../Lesson3/mainwindow.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Lesson3/main.cpp
 
 mainwindow.o: ../Lesson3/mainwindow.cpp ../Lesson3/mainwindow.h \
-		../Lesson3/help.h \
-		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/QDialog \
-		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qdialog.h \
-		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
-		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtGui/qtguiglobal.h \
+		../Lesson3/choosekeys.h \
+		../Lesson3/keys.h \
+		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/Qt \
+		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qnamespace.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qglobal.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qconfig-bootstrapped.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qconfig.h \
@@ -1943,12 +1940,15 @@ mainwindow.o: ../Lesson3/mainwindow.cpp ../Lesson3/mainwindow.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qmutex.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qnumeric.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qversiontagging.h \
+		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/QDialog \
+		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qdialog.h \
+		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
+		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtGui/qtguiglobal.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtGui/qtgui-config.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qtwidgets-config.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qwidget.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtGui/qwindowdefs.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qobjectdefs.h \
-		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qnamespace.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qobjectdefs_impl.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtGui/qwindowdefs_win.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qobject.h \
@@ -2022,13 +2022,11 @@ mainwindow.o: ../Lesson3/mainwindow.cpp ../Lesson3/mainwindow.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qfiledevice.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtGui/qvector2d.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtGui/qtouchdevice.h \
+		../Lesson3/help.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/QMainWindow \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qmainwindow.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qtabwidget.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtGui/qicon.h \
-		../Lesson3/keys.h \
-		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/Qt \
-		../Lesson3/choosekeys.h \
 		ui_mainwindow.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/QVariant \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/QApplication \
@@ -2397,9 +2395,6 @@ mainwindow.o: ../Lesson3/mainwindow.cpp ../Lesson3/mainwindow.h \
 
 qrc_help.o: qrc_help.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_help.o qrc_help.cpp
-
-qrc_keys.o: qrc_keys.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_keys.o qrc_keys.cpp
 
 moc_choosekeys.o: moc_choosekeys.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_choosekeys.o moc_choosekeys.cpp

@@ -4,23 +4,42 @@
 <context>
     <name>ChooseKeys</name>
     <message>
-        <location filename="choosekeys.ui" line="13"/>
+        <location filename="choosekeys.ui" line="14"/>
+        <location filename="choosekeys.cpp" line="77"/>
         <source>Dialog</source>
-        <translation type="unfinished">Справка</translation>
+        <translation>ВыборКл</translation>
+    </message>
+    <message>
+        <location filename="choosekeys.ui" line="26"/>
+        <source>save as</source>
+        <translation>сохрКак</translation>
+    </message>
+    <message>
+        <location filename="choosekeys.ui" line="39"/>
+        <source>save</source>
+        <translation>сохр</translation>
+    </message>
+    <message>
+        <location filename="choosekeys.ui" line="52"/>
+        <source>open</source>
+        <translation>открыть</translation>
+    </message>
+    <message>
+        <location filename="choosekeys.ui" line="65"/>
+        <source>quit</source>
+        <translation>выйти</translation>
+    </message>
+    <message>
+        <location filename="choosekeys.ui" line="88"/>
+        <source>save keys</source>
+        <translatorcomment>saveKeys</translatorcomment>
+        <translation>сохр</translation>
     </message>
 </context>
 <context>
     <name>Dialog</name>
     <message>
         <location filename="help.ui" line="14"/>
-        <source>Dialog</source>
-        <translation>Справка</translation>
-    </message>
-</context>
-<context>
-    <name>Help</name>
-    <message>
-        <location filename="help.cpp" line="17"/>
         <source>Dialog</source>
         <translation type="unfinished">Справка</translation>
     </message>
@@ -50,22 +69,27 @@
     <message>
         <location filename="mainwindow.ui" line="76"/>
         <source>en</source>
-        <translation>Англ</translation>
+        <translation>Анг</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="89"/>
         <source>ru</source>
-        <translation>Рус</translation>
+        <translation>рус</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="102"/>
-        <source>read_open</source>
-        <translation type="unfinished"></translation>
+        <source>readOpen</source>
+        <translation>чтение</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="115"/>
-        <source>save as</source>
-        <translation type="unfinished"></translation>
+        <source>saveAs</source>
+        <translation>созхрКак</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="128"/>
+        <source>hotKeys</source>
+        <translation>горКл</translation>
     </message>
 </context>
 </TS>

@@ -1,29 +1,45 @@
 #include "keys.h"
+#include <QDir>
 #include <QFile>
 #include <QTextStream>
 
 Keys::Keys() {
   QFile key_file("keys/keys.txt");
   QTextStream istream(&key_file);
-  key_file.open(QIODevice::ReadOnly);
-  int temp;
-  istream >> temp;
-  code_key_create_.key_code = static_cast<Qt::Key>(temp);
-  istream >> temp;
-  code_key_create_.key_modifier = static_cast<Qt::KeyboardModifier>(temp);
-  istream >> temp;
-  code_key_save_.key_code = static_cast<Qt::Key>(temp);
-  istream >> temp;
-  code_key_save_.key_modifier = static_cast<Qt::KeyboardModifier>(temp);
-  istream >> temp;
-  code_key_open_.key_code = static_cast<Qt::Key>(temp);
-  istream >> temp;
-  code_key_open_.key_modifier = static_cast<Qt::KeyboardModifier>(temp);
-  istream >> temp;
-  code_key_exit_.key_code = static_cast<Qt::Key>(temp);
-  istream >> temp;
-  code_key_exit_.key_modifier = static_cast<Qt::KeyboardModifier>(temp);
-  key_file.close();
+  if (key_file.open(QIODevice::ReadOnly)) {
+    int temp;
+    istream >> temp;
+    code_key_create_.key_code = static_cast<Qt::Key>(temp);
+    istream >> temp;
+    code_key_create_.key_modifier = static_cast<Qt::KeyboardModifier>(temp);
+    istream >> temp;
+    code_key_save_.key_code = static_cast<Qt::Key>(temp);
+    istream >> temp;
+    code_key_save_.key_modifier = static_cast<Qt::KeyboardModifier>(temp);
+    istream >> temp;
+    code_key_open_.key_code = static_cast<Qt::Key>(temp);
+    istream >> temp;
+    code_key_open_.key_modifier = static_cast<Qt::KeyboardModifier>(temp);
+    istream >> temp;
+    code_key_exit_.key_code = static_cast<Qt::Key>(temp);
+    istream >> temp;
+    code_key_exit_.key_modifier = static_cast<Qt::KeyboardModifier>(temp);
+    key_file.close();
+  } else {
+    QDir directory;
+    if (!directory.cd("keys")) {
+      directory.mkdir("keys");
+    }
+    code_key_create_.key_code = Qt::Key_N;
+    code_key_create_.key_modifier = Qt::ControlModifier;
+    code_key_save_.key_code = Qt::Key_S;
+    code_key_save_.key_modifier = Qt::ControlModifier;
+    code_key_open_.key_code = Qt::Key_O;
+    code_key_open_.key_modifier = Qt::ControlModifier;
+    code_key_exit_.key_code = Qt::Key_Q;
+    code_key_exit_.key_modifier = Qt::ControlModifier;
+    writeKeysToFile();
+  }
 }
 const KeyShortcut &Keys::getCodeKeyCreate() const { return code_key_create_; }
 const KeyShortcut &Keys::getCodeKeyOpen() const { return code_key_open_; }

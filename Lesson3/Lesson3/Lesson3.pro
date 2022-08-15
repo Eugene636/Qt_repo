@@ -25,8 +25,9 @@ FORMS += \
     choosekeys.ui \
     help.ui \
     mainwindow.ui
-TRANSLATIONS += Qt_Language_ru.ts  Qt_Language_en.ts
 CODECFORSRC = UTF-8
+TRANSLATIONS += Qt_Language_ru.ts  Qt_Language_en.ts
+
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -34,5 +35,4 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
-    help.qrc \
-    keys.qrc
+    help.qrc
