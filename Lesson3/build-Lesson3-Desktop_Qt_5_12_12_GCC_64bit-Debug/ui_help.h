@@ -25,7 +25,7 @@ public:
     {
         if (Dialog->objectName().isEmpty())
             Dialog->setObjectName(QString::fromUtf8("Dialog"));
-        Dialog->resize(400, 300);
+        Dialog->resize(384, 300);
         help_text = new QTextBrowser(Dialog);
         help_text->setObjectName(QString::fromUtf8("help_text"));
         help_text->setGeometry(QRect(-5, 1, 411, 301));

@@ -1,6 +1,6 @@
 #ifndef CHOOSEKEYS_H
 #define CHOOSEKEYS_H
-
+/*Диалоговое меню выбора горячих клавиш. */
 #include "keys.h"
 #include <QDialog>
 namespace Ui {
@@ -20,10 +20,16 @@ protected:
   virtual void keyPressEvent(QKeyEvent *event) override;
 
 private:
-  KeyShortcut change_keys(QKeyEvent *);
+  KeyShortcut
+  change_keys(QKeyEvent *); //функция для получения значений keymodifier и
+                            //keycode. поскольку не нашлось функции
+  //для прямого привоения qt::keymodifiers
   Ui::ChooseKeys *ui;
-  void keysForUser();
-  void keysToTextField(const KeyShortcut &, QPlainTextEdit *);
+  void keysForUser(); //вывод всех в текстовые поля UI
+  void
+  keysToTextField(const KeyShortcut &,
+                  QPlainTextEdit *); //вывод конкретного значения keyshortcut в
+                                     //конкретное текстовое поле
   Keys *hot_keys_;
 };
 
