@@ -11,11 +11,13 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPlainTextEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -24,15 +26,18 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralwidget;
-    QPlainTextEdit *opened;
-    QPushButton *open_button;
+    QVBoxLayout *verticalLayout;
+    QGridLayout *buttonLayout_2;
     QPushButton *save_button;
-    QPushButton *help_button;
     QPushButton *en;
-    QPushButton *ru;
-    QPushButton *r_only_button;
-    QPushButton *save_as_button;
+    QPushButton *open_button;
+    QPushButton *help_button;
     QPushButton *hot_keys_button;
+    QPushButton *r_only_button;
+    QPushButton *ru;
+    QPushButton *save_as_button;
+    QPushButton *night_button;
+    QPlainTextEdit *opened;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -43,33 +48,63 @@ public:
         MainWindow->resize(800, 600);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
-        opened = new QPlainTextEdit(centralwidget);
-        opened->setObjectName(QString::fromUtf8("opened"));
-        opened->setGeometry(QRect(0, 30, 801, 521));
-        open_button = new QPushButton(centralwidget);
-        open_button->setObjectName(QString::fromUtf8("open_button"));
-        open_button->setGeometry(QRect(0, 0, 81, 31));
+        verticalLayout = new QVBoxLayout(centralwidget);
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        buttonLayout_2 = new QGridLayout();
+        buttonLayout_2->setObjectName(QString::fromUtf8("buttonLayout_2"));
         save_button = new QPushButton(centralwidget);
         save_button->setObjectName(QString::fromUtf8("save_button"));
-        save_button->setGeometry(QRect(90, 0, 91, 31));
-        help_button = new QPushButton(centralwidget);
-        help_button->setObjectName(QString::fromUtf8("help_button"));
-        help_button->setGeometry(QRect(350, 0, 101, 31));
+
+        buttonLayout_2->addWidget(save_button, 0, 9, 1, 1);
+
         en = new QPushButton(centralwidget);
         en->setObjectName(QString::fromUtf8("en"));
-        en->setGeometry(QRect(720, 0, 31, 31));
-        ru = new QPushButton(centralwidget);
-        ru->setObjectName(QString::fromUtf8("ru"));
-        ru->setGeometry(QRect(760, 0, 41, 31));
-        r_only_button = new QPushButton(centralwidget);
-        r_only_button->setObjectName(QString::fromUtf8("r_only_button"));
-        r_only_button->setGeometry(QRect(470, 0, 101, 31));
-        save_as_button = new QPushButton(centralwidget);
-        save_as_button->setObjectName(QString::fromUtf8("save_as_button"));
-        save_as_button->setGeometry(QRect(188, 0, 141, 31));
+
+        buttonLayout_2->addWidget(en, 0, 7, 1, 1);
+
+        open_button = new QPushButton(centralwidget);
+        open_button->setObjectName(QString::fromUtf8("open_button"));
+
+        buttonLayout_2->addWidget(open_button, 0, 10, 1, 1);
+
+        help_button = new QPushButton(centralwidget);
+        help_button->setObjectName(QString::fromUtf8("help_button"));
+
+        buttonLayout_2->addWidget(help_button, 0, 8, 1, 1);
+
         hot_keys_button = new QPushButton(centralwidget);
         hot_keys_button->setObjectName(QString::fromUtf8("hot_keys_button"));
-        hot_keys_button->setGeometry(QRect(588, 0, 111, 31));
+
+        buttonLayout_2->addWidget(hot_keys_button, 0, 3, 1, 1);
+
+        r_only_button = new QPushButton(centralwidget);
+        r_only_button->setObjectName(QString::fromUtf8("r_only_button"));
+
+        buttonLayout_2->addWidget(r_only_button, 0, 5, 1, 1);
+
+        ru = new QPushButton(centralwidget);
+        ru->setObjectName(QString::fromUtf8("ru"));
+
+        buttonLayout_2->addWidget(ru, 0, 6, 1, 1);
+
+        save_as_button = new QPushButton(centralwidget);
+        save_as_button->setObjectName(QString::fromUtf8("save_as_button"));
+
+        buttonLayout_2->addWidget(save_as_button, 0, 4, 1, 1);
+
+        night_button = new QPushButton(centralwidget);
+        night_button->setObjectName(QString::fromUtf8("night_button"));
+
+        buttonLayout_2->addWidget(night_button, 0, 11, 1, 1);
+
+
+        verticalLayout->addLayout(buttonLayout_2);
+
+        opened = new QPlainTextEdit(centralwidget);
+        opened->setObjectName(QString::fromUtf8("opened"));
+
+        verticalLayout->addWidget(opened);
+
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
@@ -87,14 +122,15 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
-        open_button->setText(QApplication::translate("MainWindow", "open", nullptr));
         save_button->setText(QApplication::translate("MainWindow", "save", nullptr));
-        help_button->setText(QApplication::translate("MainWindow", "help", nullptr));
         en->setText(QApplication::translate("MainWindow", "en", nullptr));
-        ru->setText(QApplication::translate("MainWindow", "ru", nullptr));
-        r_only_button->setText(QApplication::translate("MainWindow", "readOpen", nullptr));
-        save_as_button->setText(QApplication::translate("MainWindow", "saveAs", nullptr));
+        open_button->setText(QApplication::translate("MainWindow", "open", nullptr));
+        help_button->setText(QApplication::translate("MainWindow", "help", nullptr));
         hot_keys_button->setText(QApplication::translate("MainWindow", "hotKeys", nullptr));
+        r_only_button->setText(QApplication::translate("MainWindow", "readOpen", nullptr));
+        ru->setText(QApplication::translate("MainWindow", "ru", nullptr));
+        save_as_button->setText(QApplication::translate("MainWindow", "saveAs", nullptr));
+        night_button->setText(QApplication::translate("MainWindow", "n/d", nullptr));
     } // retranslateUi
 
 };

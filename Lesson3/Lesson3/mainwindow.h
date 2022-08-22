@@ -41,6 +41,8 @@ private slots:
 
   void setHotKeys();
 
+  void nightButtonSlot();
+
 protected:
   virtual void keyPressEvent(QKeyEvent *event) override;
 

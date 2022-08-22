@@ -2036,6 +2036,11 @@ mainwindow.o: ../Lesson3/mainwindow.cpp ../Lesson3/mainwindow.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qdesktopwidget.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtGui/qguiapplication.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtGui/qinputmethod.h \
+		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/QGridLayout \
+		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qgridlayout.h \
+		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qlayout.h \
+		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qlayoutitem.h \
+		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qboxlayout.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/QMenuBar \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qmenubar.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qmenu.h \
@@ -2061,7 +2066,9 @@ mainwindow.o: ../Lesson3/mainwindow.cpp ../Lesson3/mainwindow.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qabstractbutton.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/QStatusBar \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qstatusbar.h \
+		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/QVBoxLayout \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/QWidget \
+		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/QDebug \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/QDir \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qdir.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qfileinfo.h \
@@ -2287,10 +2294,6 @@ mainwindow.o: ../Lesson3/mainwindow.cpp ../Lesson3/mainwindow.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qrubberband.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qabstractitemview.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qaccessiblewidget.h \
-		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qboxlayout.h \
-		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qlayout.h \
-		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qlayoutitem.h \
-		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qgridlayout.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qbuttongroup.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qcalendarwidget.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qcheckbox.h \

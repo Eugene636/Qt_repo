@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "help.h"
 #include "ui_mainwindow.h"
+#include <QDebug>
 #include <QDir>
 #include <QErrorMessage>
 #include <QFile>
@@ -23,6 +24,8 @@ MainWindow::MainWindow(QWidget *parent)
           &MainWindow::save_as);
   connect(ui->hot_keys_button, &QPushButton::clicked, this,
           &MainWindow::setHotKeys);
+  connect(ui->night_button, &QPushButton::clicked, this,
+          &MainWindow::nightButtonSlot);
   this->switchLanguage("en");
   choose_keys_.translate("en");
   d_.translate("en");
@@ -154,4 +157,17 @@ void MainWindow::keyPressEvent(QKeyEvent *event) {
 void MainWindow::setHotKeys() {
   choose_keys_.exec();
   hot_keys_.writeKeysToFile();
+}
+
+void MainWindow::nightButtonSlot() {
+  static bool flag = true;
+  if (flag) {
+    qApp->setStyleSheet(
+        "QWidget {background-color: black; color: white} QPushButton "
+        "{background-color: brown; color: black} "
+        "QPushButton:hover {background-color: black; color: white} "
+        "QPlainTextEdit {background-color: black; color: yellow}");
+  } else
+    qApp->setStyleSheet("");
+  flag = !flag;
 }
