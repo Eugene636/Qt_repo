@@ -1,7 +1,7 @@
 #ifndef HELP_H
 #define HELP_H
 /*вывод справки. Нашли вшитый файл и выбросили в текстовое поле textbrowser*/
-#include <QDialog>
+#include <QMessageBox>
 
 namespace Ui {
 class Dialog;

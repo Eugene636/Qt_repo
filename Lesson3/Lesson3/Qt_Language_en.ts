@@ -5,34 +5,33 @@
     <name>ChooseKeys</name>
     <message>
         <location filename="choosekeys.ui" line="14"/>
-        <location filename="choosekeys.cpp" line="77"/>
         <source>Dialog</source>
-        <translation>СhooseKeys</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="choosekeys.ui" line="26"/>
         <source>save as</source>
-        <translation>saveAs</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="choosekeys.ui" line="39"/>
         <source>save</source>
-        <translation>save</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="choosekeys.ui" line="52"/>
         <source>open</source>
-        <translation>open</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="choosekeys.ui" line="65"/>
         <source>quit</source>
-        <translation>quit</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="choosekeys.ui" line="88"/>
         <source>save keys</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -40,7 +39,7 @@
     <message>
         <location filename="help.ui" line="14"/>
         <source>Dialog</source>
-        <translation type="unfinished">Help</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -51,44 +50,110 @@
         <translation>Text Edit</translation>
     </message>
     <message>
+        <location filename="mainwindow.ui" line="23"/>
+        <source>save</source>
+        <translation>Save</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="30"/>
+        <source>en</source>
+        <translation>En</translation>
+    </message>
+    <message>
         <location filename="mainwindow.ui" line="37"/>
         <source>open</source>
-        <translation>open</translation>
+        <translation>Open</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="50"/>
-        <source>save</source>
-        <translation>save</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="63"/>
+        <location filename="mainwindow.ui" line="44"/>
         <source>help</source>
         <translation>Help</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="76"/>
-        <source>en</source>
-        <translation>en</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="89"/>
-        <source>ru</source>
-        <translation>ru</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="102"/>
-        <source>readOpen</source>
-        <translation>read</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="115"/>
-        <source>saveAs</source>
-        <translation>saveAs</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="128"/>
+        <location filename="mainwindow.ui" line="51"/>
         <source>hotKeys</source>
-        <translation>HotKeys</translation>
+        <translation>Hot keys</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="58"/>
+        <source>readOpen</source>
+        <translation>For read</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="65"/>
+        <source>ru</source>
+        <translation>Ru</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="72"/>
+        <source>saveAs</source>
+        <translation>Save as</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="79"/>
+        <source>n/d</source>
+        <translation>N/D</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="104"/>
+        <source>File</source>
+        <translation>Settings</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="109"/>
+        <source>Settings</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="114"/>
+        <location filename="mainwindow.cpp" line="47"/>
+        <source>Help</source>
+        <translation>Help</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="124"/>
+        <source>Open</source>
+        <translation>Open</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="32"/>
+        <source>File Open</source>
+        <translation>File Open</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="34"/>
+        <source>File Save</source>
+        <translation>File Save</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="36"/>
+        <source>Save As</source>
+        <translation>Ыфму Фы</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="37"/>
+        <source>Read Only Open</source>
+        <translation>Read only</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="39"/>
+        <source>Russian Language</source>
+        <translation>Russian language</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="41"/>
+        <source>English Language</source>
+        <translation>English language</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="43"/>
+        <source>Set Hot Keys</source>
+        <translation>Hot Keys</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="45"/>
+        <source>Theme switch</source>
+        <translation>Theme</translation>
     </message>
 </context>
 </TS>

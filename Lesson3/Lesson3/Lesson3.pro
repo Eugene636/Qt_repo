@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui printsupport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -10,6 +10,7 @@ CONFIG += c++11
 
 SOURCES += \
     choosekeys.cpp \
+    fileplaintextedit.cpp \
     help.cpp \
     keys.cpp \
     main.cpp \
@@ -17,6 +18,7 @@ SOURCES += \
 
 HEADERS += \
     choosekeys.h \
+    fileplaintextedit.h \
     help.h \
     keys.h \
     mainwindow.h

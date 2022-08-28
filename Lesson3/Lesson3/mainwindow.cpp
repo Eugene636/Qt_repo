@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "fileplaintextedit.h"
 #include "help.h"
 #include "ui_mainwindow.h"
 #include <QDebug>
@@ -6,6 +7,8 @@
 #include <QErrorMessage>
 #include <QFile>
 #include <QFileInfo>
+#include <QPrintDialog>
+#include <QPrinter>
 #include <QTextStream>
 #include <QtWidgets>
 MainWindow::MainWindow(QWidget *parent)
@@ -13,43 +16,53 @@ MainWindow::MainWindow(QWidget *parent)
       d_(this), ui(new Ui::MainWindow) {
   ui->setupUi(this);
   error_ = new QErrorMessage;
-  directory_ = new QDir;
-  directory_->current();
-  current_file_ = new QFileInfo;
-  connect(ui->ru, &QPushButton::clicked, this, &MainWindow::onRussian);
-  connect(ui->en, &QPushButton::clicked, this, &MainWindow::onEnglish);
-  connect(ui->r_only_button, &QPushButton::clicked, this,
-          &MainWindow::read_open);
-  connect(ui->save_as_button, &QPushButton::clicked, this,
-          &MainWindow::save_as);
-  connect(ui->hot_keys_button, &QPushButton::clicked, this,
-          &MainWindow::setHotKeys);
-  connect(ui->night_button, &QPushButton::clicked, this,
-          &MainWindow::nightButtonSlot);
-  this->switchLanguage("en");
-  choose_keys_.translate("en");
   d_.translate("en");
+  ui->menuFile->addAction("New", [this]() { new_window(); })
+      ->setShortcut(QKeySequence("Ctrl+N"));
+  ui->menuFile
+      ->addAction(tr("File Open"), [this]() { on_open_button_clicked(); })
+      ->setShortcut(QKeySequence("Ctrl+O"));
+  ui->menuFile
+      ->addAction(tr("File Save"), [this]() { on_save_button_clicked(); })
+      ->setShortcut(QKeySequence("Ctrl+S"));
+  ui->menuFile->addAction(tr("Save As"), [this]() { save_as(); })
+      ->setShortcut(QKeySequence("Ctrl+A"));
+  ui->menuFile->addAction(tr("Read Only Open"), [this]() { read_open(); })
+      ->setShortcut(QKeySequence("Ctrl+R"));
+  ui->menuSettings->addAction(tr("Russian Language"), [this]() { onRussian(); })
+      ->setShortcut(QKeySequence("Shift+R"));
+  ui->menuSettings->addAction(tr("English Language"),
+                              [this]() { onEnglish(); });
+  ui->menuSettings->addAction(tr("Set Hot Keys"), [this]() { setHotKeys(); });
+  ui->menuSettings->addAction(tr("Theme switch"),
+                              [this]() { nightButtonSlot(); });
+  ui->menuHelp->addAction(tr("Help"), [this]() { on_help_button_clicked(); })
+      ->setShortcut(QKeySequence("Ctrl+H"));
+  ui->menuFile->addAction("Print", [this]() {
+    QPrinter printer;
+    QPrintDialog dlg(&printer, this);
+    dlg.setWindowTitle("Print");
+    if (dlg.exec() != QDialog::Accepted)
+      return;
+    window_widget()->print(&printer);
+  });
   ui->centralwidget->setFocusPolicy(Qt::StrongFocus);
+  ui->work_area->setViewMode(QMdiArea::TabbedView);
+  ui->work_area->setDocumentMode(true);
 }
-MainWindow::~MainWindow() {
-
-  delete ui;
-  // delete error_;
-  delete directory_;
-  delete current_file_;
-}
+MainWindow::~MainWindow() { delete ui; }
 
 void MainWindow::on_open_button_clicked() {
   QString s = document_open();
   if (s.isEmpty())
     return;
-  if (ui->opened->isReadOnly())
-    ui->opened->setReadOnly(false);
-  ui->opened->setPlainText(file_read(s));
 }
 
 void MainWindow::on_save_button_clicked() {
-  QString s = current_file_->absoluteFilePath();
+  QMdiSubWindow *subwindow = ui->work_area->activeSubWindow();
+  FilePlainTextEdit *pwidget =
+      qobject_cast<FilePlainTextEdit *>(subwindow->widget());
+  QString s = pwidget->file_.absoluteFilePath();
   if (s.isEmpty()) {
     save_as();
     return;
@@ -57,18 +70,19 @@ void MainWindow::on_save_button_clicked() {
   QFile file(s);
   if (file.open(QIODevice::WriteOnly)) {
     QTextStream in_file(&file);
-    s = ui->opened->toPlainText();
+    s = pwidget->toPlainText();
     in_file << s;
     file.close();
   } else {
     error_->showMessage("File can not be open");
   }
+  subwindow->setWindowModified(false);
+  pwidget->blockSignals(false);
 }
 
 void MainWindow::switchLanguage(const QString &language) {
-  QTranslator translator;
-  translator.load("Qt_Language_" + language);
-  qApp->installTranslator(&translator);
+  translator_.load("Qt_Language_" + language);
+  qApp->installTranslator(&translator_);
   ui->retranslateUi(this);
   d_.translate(language);
   choose_keys_.translate(language);
@@ -82,15 +96,22 @@ void MainWindow::on_help_button_clicked() {
   d_.exec();
   return;
 }
-QString MainWindow::document_open() {
-  QString s = QFileDialog::getOpenFileName(this, "Open text file",
-                                           directory_->canonicalPath(),
-                                           "text files (*.txt)");
-  *current_file_ = QFileInfo(s);
-  *directory_ = current_file_->dir();
+QString MainWindow::document_open(bool read_only) {
+  QDir directory = QDir::current();
+  QString s = QFileDialog::getOpenFileName(
+      this, "Open text file", directory.canonicalPath(), "text files (*.txt)");
+  QFileInfo file = QFileInfo(s);
+  QMdiSubWindow *subwindow = new_window(file.fileName());
+  FilePlainTextEdit *pwidget =
+      qobject_cast<FilePlainTextEdit *>(subwindow->widget());
+  // subwindow->setWindowTitle(pwidget->file_.fileName());
+  pwidget->file_ = file;
+  pwidget->directory_ = pwidget->file_.dir();
   if (s.isEmpty()) {
     error_->showMessage("File name is not choosed");
   }
+  pwidget->setReadOnly(read_only);
+  pwidget->setPlainText(file_read(s));
   return s;
 }
 void MainWindow::onRussian() { switchLanguage("ru"); }
@@ -111,51 +132,56 @@ QString MainWindow::file_read(const QString &s) {
   }
 }
 void MainWindow::save_as() {
+  QMdiSubWindow *subwindow = ui->work_area->activeSubWindow();
+  FilePlainTextEdit *pwidget =
+      qobject_cast<FilePlainTextEdit *>(subwindow->widget());
   QString s = QFileDialog::getSaveFileName(this, "Save text file",
-                                           directory_->canonicalPath(),
+                                           pwidget->directory_.canonicalPath(),
                                            "text files (*.txt)");
   if (s.isEmpty()) {
     error_->showMessage("File name is not choosed");
     return;
   }
+  QFileInfo fil(s);
+  pwidget->file_ = fil;
+  pwidget->directory_ = fil.absoluteDir();
+  subwindow->setWindowTitle(fil.fileName() + "[*]");
   QFile file(s);
   if (file.open(QIODevice::WriteOnly)) {
     QTextStream in_file(&file);
-    s = ui->opened->toPlainText();
+    s = pwidget->toPlainText();
     in_file << s;
     file.close();
   } else {
     error_->showMessage("File can not be open");
     return;
   }
+  subwindow->setWindowModified(false);
+  pwidget->blockSignals(false);
 }
 void MainWindow::read_open() {
-  QString s = document_open();
+  QString s = document_open(true);
   if (s.isEmpty())
     return;
-  if (ui->opened->isReadOnly())
-    ui->opened->setReadOnly(false);
-  ui->opened->setPlainText(file_read(s));
-  ui->opened->setReadOnly(true);
 }
 void MainWindow::exit() { this->close(); }
 
 void MainWindow::keyPressEvent(QKeyEvent *event) {
-  if ((event->modifiers() == hot_keys_.getCodeKeyCreate().key_modifier) &&
-      (event->key() == hot_keys_.getCodeKeyCreate().key_code))
-    save_as();
-  if ((event->modifiers() == hot_keys_.getCodeKeyOpen().key_modifier) &&
-      (event->key() == hot_keys_.getCodeKeyOpen().key_code))
-    on_open_button_clicked();
-  if ((event->modifiers() == hot_keys_.getCodeKeySave().key_modifier) &&
-      (event->key() == hot_keys_.getCodeKeySave().key_code))
-    on_save_button_clicked();
-  if ((event->modifiers() == hot_keys_.getCodeKeyExit().key_modifier) &&
-      (event->key() == hot_keys_.getCodeKeyExit().key_code))
-    exit();
+  /* if ((event->modifiers() == hot_keys_.getCodeKeyCreate().key_modifier) &&
+       (event->key() == hot_keys_.getCodeKeyCreate().key_code))
+     save_as();
+   if ((event->modifiers() == hot_keys_.getCodeKeyOpen().key_modifier) &&
+       (event->key() == hot_keys_.getCodeKeyOpen().key_code))
+     on_open_button_clicked();
+   if ((event->modifiers() == hot_keys_.getCodeKeySave().key_modifier) &&
+       (event->key() == hot_keys_.getCodeKeySave().key_code))
+     on_save_button_clicked();
+   if ((event->modifiers() == hot_keys_.getCodeKeyExit().key_modifier) &&
+       (event->key() == hot_keys_.getCodeKeyExit().key_code))
+     exit();*/
 }
 void MainWindow::setHotKeys() {
-  choose_keys_.exec();
+  choose_keys_.open();
   hot_keys_.writeKeysToFile();
 }
 
@@ -170,4 +196,36 @@ void MainWindow::nightButtonSlot() {
   } else
     qApp->setStyleSheet("");
   flag = !flag;
+}
+
+FilePlainTextEdit *MainWindow::window_widget() {
+  QMdiSubWindow *pwindow = ui->work_area->activeSubWindow();
+  return qobject_cast<FilePlainTextEdit *>(pwindow->widget());
+}
+QMdiSubWindow *MainWindow::new_window(const QString &name) {
+  QMdiSubWindow *subwindow = new QMdiSubWindow;
+  subwindow->setAttribute(Qt::WA_DeleteOnClose);
+  FilePlainTextEdit *text = new FilePlainTextEdit;
+  if (name == "Untitled") {
+    int i = 0;
+    for (auto w : ui->work_area->subWindowList()) {
+      if (qobject_cast<FilePlainTextEdit *>(w->widget())->untitled_flag_)
+        i++;
+    }
+    subwindow->setWindowTitle(name + QString::number(i) + "[*]");
+  } else {
+    subwindow->setWindowTitle(name + "[*]");
+    text->untitled_flag_ = false;
+  }
+  text->blockSignals(true);
+  auto mod = [subwindow, text]() {
+    subwindow->setWindowModified(true);
+    text->blockSignals(true);
+  };
+  connect(text, &QPlainTextEdit::textChanged, subwindow, mod);
+  subwindow->setWidget(text);
+  ui->work_area->addSubWindow(subwindow);
+  subwindow->show();
+  text->blockSignals(false);
+  return subwindow;
 }
