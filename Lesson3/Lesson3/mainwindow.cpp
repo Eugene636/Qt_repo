@@ -31,21 +31,24 @@ MainWindow::MainWindow(QWidget *parent)
       ->setShortcut(QKeySequence("Ctrl+R"));
   ui->menuSettings->addAction(tr("Russian Language"), [this]() { onRussian(); })
       ->setShortcut(QKeySequence("Shift+R"));
-  ui->menuSettings->addAction(tr("English Language"),
-                              [this]() { onEnglish(); });
-  ui->menuSettings->addAction(tr("Set Hot Keys"), [this]() { setHotKeys(); });
+  ui->menuSettings->addAction(tr("English Language"), [this]() { onEnglish(); })
+      ->setShortcut(QKeySequence("Shift+E"));
+  ;
   ui->menuSettings->addAction(tr("Theme switch"),
                               [this]() { nightButtonSlot(); });
   ui->menuHelp->addAction(tr("Help"), [this]() { on_help_button_clicked(); })
       ->setShortcut(QKeySequence("Ctrl+H"));
-  ui->menuFile->addAction("Print", [this]() {
-    QPrinter printer;
-    QPrintDialog dlg(&printer, this);
-    dlg.setWindowTitle("Print");
-    if (dlg.exec() != QDialog::Accepted)
-      return;
-    window_widget()->print(&printer);
-  });
+  ui->menuFile
+      ->addAction("Print",
+                  [this]() {
+                    QPrinter printer;
+                    QPrintDialog dlg(&printer, this);
+                    dlg.setWindowTitle("Print");
+                    if (dlg.exec() != QDialog::Accepted)
+                      return;
+                    window_widget()->print(&printer);
+                  })
+      ->setShortcut(QKeySequence("Ctrl + P"));
   ui->centralwidget->setFocusPolicy(Qt::StrongFocus);
   ui->work_area->setViewMode(QMdiArea::TabbedView);
   ui->work_area->setDocumentMode(true);
@@ -104,7 +107,6 @@ QString MainWindow::document_open(bool read_only) {
   QMdiSubWindow *subwindow = new_window(file.fileName());
   FilePlainTextEdit *pwidget =
       qobject_cast<FilePlainTextEdit *>(subwindow->widget());
-  // subwindow->setWindowTitle(pwidget->file_.fileName());
   pwidget->file_ = file;
   pwidget->directory_ = pwidget->file_.dir();
   if (s.isEmpty()) {
@@ -166,7 +168,8 @@ void MainWindow::read_open() {
 }
 void MainWindow::exit() { this->close(); }
 
-void MainWindow::keyPressEvent(QKeyEvent *event) {
+void MainWindow::keyPressEvent(
+    QKeyEvent *event) { //убрал функционал, связанный со сменой горячих клавиш.
   /* if ((event->modifiers() == hot_keys_.getCodeKeyCreate().key_modifier) &&
        (event->key() == hot_keys_.getCodeKeyCreate().key_code))
      save_as();
@@ -212,7 +215,10 @@ QMdiSubWindow *MainWindow::new_window(const QString &name) {
       if (qobject_cast<FilePlainTextEdit *>(w->widget())->untitled_flag_)
         i++;
     }
-    subwindow->setWindowTitle(name + QString::number(i) + "[*]");
+    if (i)
+      subwindow->setWindowTitle(name + '(' + QString::number(i) + ')' + "[*]");
+    else
+      subwindow->setWindowTitle(name + "[*]");
   } else {
     subwindow->setWindowTitle(name + "[*]");
     text->untitled_flag_ = false;
