@@ -17,38 +17,50 @@ MainWindow::MainWindow(QWidget *parent)
   ui->setupUi(this);
   error_ = new QErrorMessage;
   d_.translate("en");
-  ui->menuFile->addAction("New", [this]() { new_window(); })
-      ->setShortcut(QKeySequence("Ctrl+N"));
-  ui->menuFile
-      ->addAction(tr("File Open"), [this]() { on_open_button_clicked(); })
-      ->setShortcut(QKeySequence("Ctrl+O"));
-  ui->menuFile
-      ->addAction(tr("File Save"), [this]() { on_save_button_clicked(); })
-      ->setShortcut(QKeySequence("Ctrl+S"));
-  ui->menuFile->addAction(tr("Save As"), [this]() { save_as(); })
-      ->setShortcut(QKeySequence("Ctrl+A"));
-  ui->menuFile->addAction(tr("Read Only Open"), [this]() { read_open(); })
-      ->setShortcut(QKeySequence("Ctrl+R"));
-  ui->menuSettings->addAction(tr("Russian Language"), [this]() { onRussian(); })
-      ->setShortcut(QKeySequence("Shift+R"));
-  ui->menuSettings->addAction(tr("English Language"), [this]() { onEnglish(); })
-      ->setShortcut(QKeySequence("Shift+E"));
-  ;
-  ui->menuSettings->addAction(tr("Theme switch"),
-                              [this]() { nightButtonSlot(); });
-  ui->menuHelp->addAction(tr("Help"), [this]() { on_help_button_clicked(); })
-      ->setShortcut(QKeySequence("Ctrl+H"));
-  ui->menuFile
-      ->addAction("Print",
-                  [this]() {
-                    QPrinter printer;
-                    QPrintDialog dlg(&printer, this);
-                    dlg.setWindowTitle("Print");
-                    if (dlg.exec() != QDialog::Accepted)
-                      return;
-                    window_widget()->print(&printer);
-                  })
-      ->setShortcut(QKeySequence("Ctrl + P"));
+  QAction *paction;
+  paction = ui->menuFile->addAction("New", [this]() { new_window(); });
+  paction->setShortcut(QKeySequence("Ctrl+N"));
+  FileList.push_back(paction);
+  paction = ui->menuFile->addAction("File Open",
+                                    [this]() { on_open_button_clicked(); });
+  paction->setShortcut(QKeySequence("Ctrl+O"));
+  FileList.push_back(paction);
+  paction = ui->menuFile->addAction("File Save",
+                                    [this]() { on_save_button_clicked(); });
+  paction->setShortcut(QKeySequence("Ctrl+S"));
+  FileList.push_back(paction);
+  paction = ui->menuFile->addAction("Save As", [this]() { save_as(); });
+  paction->setShortcut(QKeySequence("Ctrl+A"));
+  FileList.push_back(paction);
+  paction =
+      ui->menuFile->addAction("Read Only Open", [this]() { read_open(); });
+  paction->setShortcut(QKeySequence("Ctrl+R"));
+  FileList.push_back(paction);
+  paction = ui->menuSettings->addAction("Russian Language",
+                                        [this]() { onRussian(); });
+  paction->setShortcut(QKeySequence("Shift+R"));
+  SettingsList.push_back(paction);
+  paction = ui->menuSettings->addAction("English Language",
+                                        [this]() { onEnglish(); });
+  paction->setShortcut(QKeySequence("Shift+E"));
+  SettingsList.push_back(paction);
+  paction = ui->menuSettings->addAction("Theme switch",
+                                        [this]() { nightButtonSlot(); });
+  SettingsList.push_back(paction);
+  paction =
+      ui->menuHelp->addAction("Help", [this]() { on_help_button_clicked(); });
+  paction->setShortcut(QKeySequence("Ctrl+H"));
+  HelpList.push_back(paction);
+  paction = ui->menuFile->addAction("Print", [this]() {
+    QPrinter printer;
+    QPrintDialog dlg(&printer, this);
+    dlg.setWindowTitle("Print");
+    if (dlg.exec() != QDialog::Accepted)
+      return;
+    window_widget()->print(&printer);
+  });
+  paction->setShortcut(QKeySequence("Ctrl + P"));
+  FileList.push_back(paction);
   ui->centralwidget->setFocusPolicy(Qt::StrongFocus);
   ui->work_area->setViewMode(QMdiArea::TabbedView);
   ui->work_area->setDocumentMode(true);
@@ -89,6 +101,14 @@ void MainWindow::switchLanguage(const QString &language) {
   ui->retranslateUi(this);
   d_.translate(language);
   choose_keys_.translate(language);
+  FileList[0]->setText(tr("New"));
+  FileList[1]->setText(tr("File Open"));
+  FileList[2]->setText(tr("File Save"));
+  FileList[3]->setText(tr("Save As"));
+  FileList[4]->setText(tr("Read Only Open"));
+  FileList[5]->setText(tr("Print"));
+  SettingsList[2]->setText(tr("Theme switch"));
+  HelpList[0]->setText(tr("See Help"));
 }
 
 void MainWindow::on_help_button_clicked() {

@@ -65,5 +65,8 @@ private:
   Help d_;
   ChooseKeys choose_keys_;
   QTranslator translator_;
+  QList<QAction *> FileList;
+  QList<QAction *> SettingsList;
+  QList<QAction *> HelpList;
 };
 #endif // MAINWINDOW_H

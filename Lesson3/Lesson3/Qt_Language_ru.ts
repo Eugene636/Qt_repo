@@ -39,7 +39,7 @@
     <message>
         <location filename="help.ui" line="14"/>
         <source>Dialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Справка</translation>
     </message>
 </context>
 <context>
@@ -50,110 +50,64 @@
         <translation>Текстовый редактор</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="23"/>
-        <source>save</source>
-        <translation>Сохранить</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="30"/>
-        <source>en</source>
-        <translation>Анг</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="37"/>
-        <source>open</source>
-        <translation>открыть</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="44"/>
-        <source>help</source>
-        <translation>Справка</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="51"/>
-        <source>hotKeys</source>
-        <translation>горКл</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="58"/>
-        <source>readOpen</source>
-        <translation>Чтение</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="65"/>
-        <source>ru</source>
-        <translation>Рус</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="72"/>
-        <source>saveAs</source>
-        <translation>Сохр как</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="79"/>
-        <source>n/d</source>
-        <translation>Тема</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="104"/>
+        <location filename="mainwindow.ui" line="34"/>
         <source>File</source>
+        <translation>Файл</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="39"/>
+        <source>Settings</source>
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="109"/>
-        <source>Settings</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="114"/>
-        <location filename="mainwindow.cpp" line="47"/>
+        <location filename="mainwindow.ui" line="44"/>
         <source>Help</source>
         <translation>Справка</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="124"/>
+        <location filename="mainwindow.ui" line="54"/>
         <source>Open</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="103"/>
+        <source>New</source>
+        <translation>Новый</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="104"/>
+        <source>File Open</source>
         <translation>Открыть</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="32"/>
-        <source>File Open</source>
-        <translation>Открыть файл</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="34"/>
+        <location filename="mainwindow.cpp" line="105"/>
         <source>File Save</source>
-        <translation>Сохранить файл</translation>
+        <translation>Сохранить</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="36"/>
+        <location filename="mainwindow.cpp" line="106"/>
         <source>Save As</source>
         <translation>Сохранить как</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="37"/>
+        <location filename="mainwindow.cpp" line="107"/>
         <source>Read Only Open</source>
-        <translation>Режим чтение</translation>
+        <translation>Открыть для чтения</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="39"/>
-        <source>Russian Language</source>
-        <translation>Русский язык</translation>
+        <location filename="mainwindow.cpp" line="108"/>
+        <source>Print</source>
+        <translation>Печать</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="41"/>
-        <source>English Language</source>
-        <translation>Английский язык</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="43"/>
-        <source>Set Hot Keys</source>
-        <translation>Горячие клавиши</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="45"/>
+        <location filename="mainwindow.cpp" line="109"/>
         <source>Theme switch</source>
-        <translation>Тема</translation>
+        <translation>Другая тема</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="110"/>
+        <source>See Help</source>
+        <translation>Показать справку</translation>
     </message>
 </context>
 </TS>
