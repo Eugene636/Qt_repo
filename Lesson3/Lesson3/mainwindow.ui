@@ -44,9 +44,15 @@
      <string>Help</string>
     </property>
    </widget>
+   <widget class="QMenu" name="menuTask1">
+    <property name="title">
+     <string>Task1</string>
+    </property>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuSettings"/>
    <addaction name="menuHelp"/>
+   <addaction name="menuTask1"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionOpen">

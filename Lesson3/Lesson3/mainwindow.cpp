@@ -7,6 +7,7 @@
 #include <QErrorMessage>
 #include <QFile>
 #include <QFileInfo>
+#include <QFontDialog>
 #include <QPrintDialog>
 #include <QPrinter>
 #include <QTextStream>
@@ -61,9 +62,20 @@ MainWindow::MainWindow(QWidget *parent)
   });
   paction->setShortcut(QKeySequence("Ctrl + P"));
   FileList.push_back(paction);
+  ui->menuTask1->addAction("Set random Format", this,
+                           SLOT(random_size_of_font()));
+  ui->menuTask1->addAction("Copy format", this, SLOT(copyFormat()));
+  ui->menuTask1->addAction("Set copied format", this, SLOT(setCopiedFormat()));
+  QMenu *menu = new QMenu("Alignment", this);
+  menu->addAction("Alignment left", this, SLOT(alignmentLeft()));
+  menu->addAction("Alignment right", this, SLOT(alignmentRight()));
+  menu->addAction("Alignment center", this, SLOT(alignmentCenter()));
+  ui->menuTask1->addMenu(menu);
+  ui->menuTask1->addAction("Set Font", this, SLOT(setFont()));
   ui->centralwidget->setFocusPolicy(Qt::StrongFocus);
   ui->work_area->setViewMode(QMdiArea::TabbedView);
   ui->work_area->setDocumentMode(true);
+  srand(clock());
 }
 MainWindow::~MainWindow() { delete ui; }
 
@@ -123,6 +135,10 @@ QString MainWindow::document_open(bool read_only) {
   QDir directory = QDir::current();
   QString s = QFileDialog::getOpenFileName(
       this, "Open text file", directory.canonicalPath(), "text files (*.txt)");
+  if (s.isEmpty()) {
+    error_->showMessage("File name is not choosed");
+    return "";
+  }
   QFileInfo file = QFileInfo(s);
   QMdiSubWindow *subwindow = new_window(file.fileName());
   FilePlainTextEdit *pwidget =
@@ -248,10 +264,64 @@ QMdiSubWindow *MainWindow::new_window(const QString &name) {
     subwindow->setWindowModified(true);
     text->blockSignals(true);
   };
-  connect(text, &QPlainTextEdit::textChanged, subwindow, mod);
+  connect(text, &FilePlainTextEdit::textChanged, subwindow, mod);
   subwindow->setWidget(text);
   ui->work_area->addSubWindow(subwindow);
   subwindow->show();
   text->blockSignals(false);
   return subwindow;
+}
+
+void MainWindow::random_size_of_font() {
+  FilePlainTextEdit *text = window_widget();
+  // фрагмента текста
+  text->fmt_.setForeground(
+      QBrush(QColor(rand() % 256, rand() % 256, rand() % 256)));
+  // Цвет символа
+  // (setForeground(QBrush))
+  text->fmt_.setBackground(
+      QBrush(QColor(rand() % 256, rand() % 256, rand() % 256)));
+  text->textCursor().setCharFormat(text->fmt_); // Задаем формат в
+}
+void MainWindow::copyFormat() {
+  FilePlainTextEdit *text = window_widget();
+  text->fmt_ = text->textCursor().charFormat();
+}
+void MainWindow::setCopiedFormat() {
+  FilePlainTextEdit *text = window_widget();
+  text->textCursor().setCharFormat(text->fmt_);
+}
+
+void MainWindow::alignmentLeft() {
+  FilePlainTextEdit *text = window_widget();
+  if (!text)
+    return;
+  QTextBlockFormat bfmt;
+  bfmt.setAlignment(Qt::AlignLeft);
+  text->textCursor().setBlockFormat(bfmt);
+}
+
+void MainWindow::alignmentRight() {
+  FilePlainTextEdit *text = window_widget();
+  if (!text)
+    return;
+  QTextBlockFormat bfmt;
+  bfmt.setAlignment(Qt::AlignRight);
+  text->textCursor().setBlockFormat(bfmt);
+}
+void MainWindow::alignmentCenter() {
+  FilePlainTextEdit *text = window_widget();
+  if (!text)
+    return;
+  QTextBlockFormat bfmt;
+  bfmt.setAlignment(Qt::AlignHCenter);
+  text->textCursor().setBlockFormat(bfmt);
+}
+void MainWindow::setFont() {
+  FilePlainTextEdit *text = window_widget();
+  if (!text)
+    return;
+  bool ok;
+  QFont font = QFontDialog::getFont(&ok, text);
+  text->setFont(font);
 }

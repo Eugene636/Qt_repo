@@ -44,6 +44,15 @@ private:
   void setHotKeys();
 
   void nightButtonSlot();
+private slots:
+
+  void random_size_of_font();
+  void copyFormat();
+  void setCopiedFormat();
+  void alignmentLeft();
+  void alignmentRight();
+  void alignmentCenter();
+  void setFont();
 
 protected:
   virtual void keyPressEvent(QKeyEvent *event) override;

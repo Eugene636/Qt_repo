@@ -63,7 +63,7 @@ void FilePlainTextEdit::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
 }
 
 QT_INIT_METAOBJECT const QMetaObject FilePlainTextEdit::staticMetaObject = { {
-    &QPlainTextEdit::staticMetaObject,
+    &QTextEdit::staticMetaObject,
     qt_meta_stringdata_FilePlainTextEdit.data,
     qt_meta_data_FilePlainTextEdit,
     qt_static_metacall,
@@ -82,12 +82,12 @@ void *FilePlainTextEdit::qt_metacast(const char *_clname)
     if (!_clname) return nullptr;
     if (!strcmp(_clname, qt_meta_stringdata_FilePlainTextEdit.stringdata0))
         return static_cast<void*>(this);
-    return QPlainTextEdit::qt_metacast(_clname);
+    return QTextEdit::qt_metacast(_clname);
 }
 
 int FilePlainTextEdit::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QPlainTextEdit::qt_metacall(_c, _id, _a);
+    _id = QTextEdit::qt_metacall(_c, _id, _a);
     return _id;
 }
 QT_WARNING_POP

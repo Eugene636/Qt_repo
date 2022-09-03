@@ -33,6 +33,7 @@ public:
     QMenu *menuFile;
     QMenu *menuSettings;
     QMenu *menuHelp;
+    QMenu *menuTask1;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -61,6 +62,8 @@ public:
         menuSettings->setObjectName(QString::fromUtf8("menuSettings"));
         menuHelp = new QMenu(menubar);
         menuHelp->setObjectName(QString::fromUtf8("menuHelp"));
+        menuTask1 = new QMenu(menubar);
+        menuTask1->setObjectName(QString::fromUtf8("menuTask1"));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
@@ -69,6 +72,7 @@ public:
         menubar->addAction(menuFile->menuAction());
         menubar->addAction(menuSettings->menuAction());
         menubar->addAction(menuHelp->menuAction());
+        menubar->addAction(menuTask1->menuAction());
 
         retranslateUi(MainWindow);
 
@@ -82,6 +86,7 @@ public:
         menuFile->setTitle(QApplication::translate("MainWindow", "File", nullptr));
         menuSettings->setTitle(QApplication::translate("MainWindow", "Settings", nullptr));
         menuHelp->setTitle(QApplication::translate("MainWindow", "Help", nullptr));
+        menuTask1->setTitle(QApplication::translate("MainWindow", "Task1", nullptr));
     } // retranslateUi
 
 };
