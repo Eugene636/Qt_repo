@@ -2342,6 +2342,8 @@ mainwindow.o: ../Lesson3/mainwindow.cpp ../Lesson3/mainwindow.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qlayoutitem.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qgridlayout.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/QWidget \
+		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/QDate \
+		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qdatetime.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/QDebug \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/QErrorMessage \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtWidgets/qerrormessage.h \
@@ -2381,7 +2383,6 @@ mainwindow.o: ../Lesson3/mainwindow.cpp ../Lesson3/mainwindow.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qcache.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qcborarray.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qcborvalue.h \
-		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qdatetime.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qcborcommon.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/qregularexpression.h \
 		/opt/Qt5.12.12/5.12.12/gcc_64/include/QtCore/quuid.h \

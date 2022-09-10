@@ -2,6 +2,7 @@
 #include "fileplaintextedit.h"
 #include "help.h"
 #include "ui_mainwindow.h"
+#include <QDate>
 #include <QDebug>
 #include <QDir>
 #include <QErrorMessage>
@@ -59,6 +60,24 @@ MainWindow::MainWindow(QWidget *parent)
     if (dlg.exec() != QDialog::Accepted)
       return;
     window_widget()->print(&printer);
+  });
+  paction = ui->menuLesson8->addAction("Add Data", [this]() {
+    QMdiSubWindow *subwindow = ui->work_area->activeSubWindow();
+    if (!subwindow)
+      return;
+    FilePlainTextEdit *pwidget =
+        qobject_cast<FilePlainTextEdit *>(subwindow->widget());
+    QDate date = QDate::currentDate();
+    pwidget->insertPlainText(date.toString());
+  });
+  paction = ui->menuLesson8->addAction("Add Time", [this]() {
+    QMdiSubWindow *subwindow = ui->work_area->activeSubWindow();
+    if (!subwindow)
+      return;
+    FilePlainTextEdit *pwidget =
+        qobject_cast<FilePlainTextEdit *>(subwindow->widget());
+    QTime time = QTime::currentTime();
+    pwidget->insertPlainText(time.toString());
   });
   paction->setShortcut(QKeySequence("Ctrl + P"));
   FileList.push_back(paction);

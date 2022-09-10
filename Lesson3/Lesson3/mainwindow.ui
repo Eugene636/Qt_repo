@@ -49,10 +49,16 @@
      <string>Task1</string>
     </property>
    </widget>
+   <widget class="QMenu" name="menuLesson8">
+    <property name="title">
+     <string>Lesson8</string>
+    </property>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuSettings"/>
    <addaction name="menuHelp"/>
    <addaction name="menuTask1"/>
+   <addaction name="menuLesson8"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionOpen">
