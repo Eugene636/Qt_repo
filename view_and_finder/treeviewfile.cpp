@@ -73,6 +73,7 @@ void TreeViewFile::findSender()
     QRegExp r(name_->toPlainText());
     QString s = text_->toPlainText();
     QDir    d(s);
+    findResults_->clear();
     emit    findStringSender(s, r);
 }
 void TreeViewFile::searchResults(const QString& s)
