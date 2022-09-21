@@ -15,17 +15,17 @@ public:
   explicit ChooseKeys(Keys *, QWidget *parent = nullptr);
   ~ChooseKeys();
   void translate(const QString &);
-
+  Ui::ChooseKeys *ui;
+  void keysForUser(); //вывод всех в текстовые поля UI
 protected:
   virtual void keyPressEvent(QKeyEvent *event) override;
 
 private:
   KeyShortcut
   change_keys(QKeyEvent *); //функция для получения значений keymodifier и
-                            //keycode. поскольку не нашлось функции
-  //для прямого привоения qt::keymodifiers
-  Ui::ChooseKeys *ui;
-  void keysForUser(); //вывод всех в текстовые поля UI
+                            // keycode. поскольку не нашлось функции
+  //для прямого приcвоения qt::keymodifiers
+
   void
   keysToTextField(const KeyShortcut &,
                   QPlainTextEdit *); //вывод конкретного значения keyshortcut в

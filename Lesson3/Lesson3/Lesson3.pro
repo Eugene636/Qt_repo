@@ -38,3 +38,9 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     help.qrc
+
+SUBDIRS += \
+    Tests/Tests.pro
+
+DISTFILES += \
+    Tests/Tests

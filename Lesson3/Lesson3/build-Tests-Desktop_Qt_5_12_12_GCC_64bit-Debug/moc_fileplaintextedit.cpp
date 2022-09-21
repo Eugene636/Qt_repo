@@ -1,16 +1,16 @@
 /****************************************************************************
-** Meta object code from reading C++ file 'help.h'
+** Meta object code from reading C++ file 'fileplaintextedit.h'
 **
 ** Created by: The Qt Meta Object Compiler version 67 (Qt 5.12.12)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../Lesson3/help.h"
+#include "../fileplaintextedit.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
-#error "The header file 'help.h' doesn't include <QObject>."
+#error "The header file 'fileplaintextedit.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
 #error "This file was generated using the moc from 5.12.12. It"
 #error "cannot be used with the include files from this version of Qt."
@@ -20,25 +20,25 @@
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
-struct qt_meta_stringdata_Help_t {
+struct qt_meta_stringdata_FilePlainTextEdit_t {
     QByteArrayData data[1];
-    char stringdata0[5];
+    char stringdata0[18];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_Help_t, stringdata0) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_FilePlainTextEdit_t, stringdata0) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_Help_t qt_meta_stringdata_Help = {
+static const qt_meta_stringdata_FilePlainTextEdit_t qt_meta_stringdata_FilePlainTextEdit = {
     {
-QT_MOC_LITERAL(0, 0, 4) // "Help"
+QT_MOC_LITERAL(0, 0, 17) // "FilePlainTextEdit"
 
     },
-    "Help"
+    "FilePlainTextEdit"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_Help[] = {
+static const uint qt_meta_data_FilePlainTextEdit[] = {
 
  // content:
        8,       // revision
@@ -54,7 +54,7 @@ static const uint qt_meta_data_Help[] = {
        0        // eod
 };
 
-void Help::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void FilePlainTextEdit::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     Q_UNUSED(_o);
     Q_UNUSED(_id);
@@ -62,32 +62,32 @@ void Help::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void *
     Q_UNUSED(_a);
 }
 
-QT_INIT_METAOBJECT const QMetaObject Help::staticMetaObject = { {
-    &QDialog::staticMetaObject,
-    qt_meta_stringdata_Help.data,
-    qt_meta_data_Help,
+QT_INIT_METAOBJECT const QMetaObject FilePlainTextEdit::staticMetaObject = { {
+    &QTextEdit::staticMetaObject,
+    qt_meta_stringdata_FilePlainTextEdit.data,
+    qt_meta_data_FilePlainTextEdit,
     qt_static_metacall,
     nullptr,
     nullptr
 } };
 
 
-const QMetaObject *Help::metaObject() const
+const QMetaObject *FilePlainTextEdit::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *Help::qt_metacast(const char *_clname)
+void *FilePlainTextEdit::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_Help.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_FilePlainTextEdit.stringdata0))
         return static_cast<void*>(this);
-    return QDialog::qt_metacast(_clname);
+    return QTextEdit::qt_metacast(_clname);
 }
 
-int Help::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int FilePlainTextEdit::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QDialog::qt_metacall(_c, _id, _a);
+    _id = QTextEdit::qt_metacall(_c, _id, _a);
     return _id;
 }
 QT_WARNING_POP

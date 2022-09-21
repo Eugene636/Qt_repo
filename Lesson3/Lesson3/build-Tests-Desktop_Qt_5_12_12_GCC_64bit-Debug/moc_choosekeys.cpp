@@ -1,16 +1,16 @@
 /****************************************************************************
-** Meta object code from reading C++ file 'fileplaintextedit.h'
+** Meta object code from reading C++ file 'choosekeys.h'
 **
 ** Created by: The Qt Meta Object Compiler version 67 (Qt 5.12.12)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../Lesson3/fileplaintextedit.h"
+#include "../choosekeys.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
-#error "The header file 'fileplaintextedit.h' doesn't include <QObject>."
+#error "The header file 'choosekeys.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
 #error "This file was generated using the moc from 5.12.12. It"
 #error "cannot be used with the include files from this version of Qt."
@@ -20,25 +20,25 @@
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
-struct qt_meta_stringdata_FilePlainTextEdit_t {
+struct qt_meta_stringdata_ChooseKeys_t {
     QByteArrayData data[1];
-    char stringdata0[18];
+    char stringdata0[11];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_FilePlainTextEdit_t, stringdata0) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_ChooseKeys_t, stringdata0) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_FilePlainTextEdit_t qt_meta_stringdata_FilePlainTextEdit = {
+static const qt_meta_stringdata_ChooseKeys_t qt_meta_stringdata_ChooseKeys = {
     {
-QT_MOC_LITERAL(0, 0, 17) // "FilePlainTextEdit"
+QT_MOC_LITERAL(0, 0, 10) // "ChooseKeys"
 
     },
-    "FilePlainTextEdit"
+    "ChooseKeys"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_FilePlainTextEdit[] = {
+static const uint qt_meta_data_ChooseKeys[] = {
 
  // content:
        8,       // revision
@@ -54,7 +54,7 @@ static const uint qt_meta_data_FilePlainTextEdit[] = {
        0        // eod
 };
 
-void FilePlainTextEdit::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void ChooseKeys::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     Q_UNUSED(_o);
     Q_UNUSED(_id);
@@ -62,32 +62,32 @@ void FilePlainTextEdit::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
     Q_UNUSED(_a);
 }
 
-QT_INIT_METAOBJECT const QMetaObject FilePlainTextEdit::staticMetaObject = { {
-    &QTextEdit::staticMetaObject,
-    qt_meta_stringdata_FilePlainTextEdit.data,
-    qt_meta_data_FilePlainTextEdit,
+QT_INIT_METAOBJECT const QMetaObject ChooseKeys::staticMetaObject = { {
+    &QDialog::staticMetaObject,
+    qt_meta_stringdata_ChooseKeys.data,
+    qt_meta_data_ChooseKeys,
     qt_static_metacall,
     nullptr,
     nullptr
 } };
 
 
-const QMetaObject *FilePlainTextEdit::metaObject() const
+const QMetaObject *ChooseKeys::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *FilePlainTextEdit::qt_metacast(const char *_clname)
+void *ChooseKeys::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_FilePlainTextEdit.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_ChooseKeys.stringdata0))
         return static_cast<void*>(this);
-    return QTextEdit::qt_metacast(_clname);
+    return QDialog::qt_metacast(_clname);
 }
 
-int FilePlainTextEdit::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int ChooseKeys::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QTextEdit::qt_metacall(_c, _id, _a);
+    _id = QDialog::qt_metacall(_c, _id, _a);
     return _id;
 }
 QT_WARNING_POP
