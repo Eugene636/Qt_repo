@@ -16,14 +16,17 @@
   <widget class="QRadioButton" name="save_as">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>0</y>
+     <x>20</x>
+     <y>180</y>
      <width>112</width>
      <height>23</height>
     </rect>
    </property>
    <property name="text">
     <string>save as</string>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
    </property>
   </widget>
   <widget class="QRadioButton" name="save">
@@ -55,8 +58,8 @@
   <widget class="QRadioButton" name="quit">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>190</y>
+     <x>20</x>
+     <y>10</y>
      <width>112</width>
      <height>23</height>
     </rect>

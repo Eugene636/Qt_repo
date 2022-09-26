@@ -38,7 +38,8 @@ public:
         ChooseKeys->resize(400, 300);
         save_as = new QRadioButton(ChooseKeys);
         save_as->setObjectName(QString::fromUtf8("save_as"));
-        save_as->setGeometry(QRect(10, 0, 112, 23));
+        save_as->setGeometry(QRect(20, 180, 112, 23));
+        save_as->setChecked(true);
         save = new QRadioButton(ChooseKeys);
         save->setObjectName(QString::fromUtf8("save"));
         save->setGeometry(QRect(10, 60, 112, 23));
@@ -47,7 +48,7 @@ public:
         open->setGeometry(QRect(10, 130, 112, 23));
         quit = new QRadioButton(ChooseKeys);
         quit->setObjectName(QString::fromUtf8("quit"));
-        quit->setGeometry(QRect(10, 190, 112, 23));
+        quit->setGeometry(QRect(20, 10, 112, 23));
         save_as_keys = new QPlainTextEdit(ChooseKeys);
         save_as_keys->setObjectName(QString::fromUtf8("save_as_keys"));
         save_as_keys->setGeometry(QRect(140, 10, 181, 31));
