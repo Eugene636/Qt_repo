@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FileLoader_t {
-    QByteArrayData data[7];
-    char stringdata0[63];
+    QByteArrayData data[8];
+    char stringdata0[76];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -37,11 +37,13 @@ QT_MOC_LITERAL(2, 20, 0), // ""
 QT_MOC_LITERAL(3, 21, 11), // "getTaskName"
 QT_MOC_LITERAL(4, 33, 11), // "getDeadline"
 QT_MOC_LITERAL(5, 45, 7), // "getTask"
-QT_MOC_LITERAL(6, 53, 9) // "writeTask"
+QT_MOC_LITERAL(6, 53, 9), // "writeTask"
+QT_MOC_LITERAL(7, 63, 12) // "number_tasks"
 
     },
     "FileLoader\0saveTask\0\0getTaskName\0"
-    "getDeadline\0getTask\0writeTask"
+    "getDeadline\0getTask\0writeTask\0"
+    "number_tasks"
 };
 #undef QT_MOC_LITERAL
 
@@ -52,7 +54,7 @@ static const uint qt_meta_data_FileLoader[] = {
        0,       // classname
        0,    0, // classinfo
        5,   14, // methods
-       0,    0, // properties
+       1,   56, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
@@ -71,6 +73,9 @@ static const uint qt_meta_data_FileLoader[] = {
     QMetaType::QString,
     QMetaType::QString,
     QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::QString,    2,    2,    2,
+
+ // properties: name, type, flags
+       7, QMetaType::QString, 0x00095001,
 
        0        // eod
 };
@@ -93,6 +98,19 @@ void FileLoader::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         default: ;
         }
     }
+#ifndef QT_NO_PROPERTIES
+    else if (_c == QMetaObject::ReadProperty) {
+        auto *_t = static_cast<FileLoader *>(_o);
+        Q_UNUSED(_t)
+        void *_v = _a[0];
+        switch (_id) {
+        case 0: *reinterpret_cast< QString*>(_v) = _t->getNumberTasks(); break;
+        default: break;
+        }
+    } else if (_c == QMetaObject::WriteProperty) {
+    } else if (_c == QMetaObject::ResetProperty) {
+    }
+#endif // QT_NO_PROPERTIES
 }
 
 QT_INIT_METAOBJECT const QMetaObject FileLoader::staticMetaObject = { {
@@ -132,6 +150,23 @@ int FileLoader::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
             *reinterpret_cast<int*>(_a[0]) = -1;
         _id -= 5;
     }
+#ifndef QT_NO_PROPERTIES
+    else if (_c == QMetaObject::ReadProperty || _c == QMetaObject::WriteProperty
+            || _c == QMetaObject::ResetProperty || _c == QMetaObject::RegisterPropertyMetaType) {
+        qt_static_metacall(this, _c, _id, _a);
+        _id -= 1;
+    } else if (_c == QMetaObject::QueryPropertyDesignable) {
+        _id -= 1;
+    } else if (_c == QMetaObject::QueryPropertyScriptable) {
+        _id -= 1;
+    } else if (_c == QMetaObject::QueryPropertyStored) {
+        _id -= 1;
+    } else if (_c == QMetaObject::QueryPropertyEditable) {
+        _id -= 1;
+    } else if (_c == QMetaObject::QueryPropertyUser) {
+        _id -= 1;
+    }
+#endif // QT_NO_PROPERTIES
     return _id;
 }
 QT_WARNING_POP

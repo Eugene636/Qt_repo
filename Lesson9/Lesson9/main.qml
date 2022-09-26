@@ -53,10 +53,11 @@ Button {
         task_name.clear()
         deadline.clear()
         overwrite.clear()
+        number_tasks.text = loader.number_tasks
     }
     else {
         reaction.clear()
-        reaction.insert(0, "Data format error")
+        reaction.insert(0, "Task can not empty fields. Data format is dd.mm.yyyy")
     }
     }
 }
@@ -89,7 +90,20 @@ Text {
     height:20
     y: 60
     text: "Deadline:"
+}
 
+TextArea {
+    id: number_tasks
+    anchors.right: parent.right
+    anchors.top: new_task.bottom
+    width: 40
+    height: 50
+    x: 600
+    text: loader.number_tasks
+    background: Rectangle {
+        anchors.fill: parent
+        color: "bisque"
+    }
 }
 
 TextArea {

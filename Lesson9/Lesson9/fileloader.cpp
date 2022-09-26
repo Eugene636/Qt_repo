@@ -4,7 +4,19 @@
 
 FileLoader::FileLoader(QObject *parent) {
   file_.setFileName("Tasks.txt");
+  file_.open(QIODevice::ReadOnly);
+  QTextStream txt(&file_);
+  m_number_tasks = 0;
+  QString s;
+  while (!txt.atEnd()) {
+    txt >> s;
+    if (s == "__End_task__")
+      m_number_tasks++;
+  }
+  file_.close();
+  file_.setFileName("Tasks.txt");
   file_.open(QIODevice::Append);
+
   // last_task_file_.setFileName("LastTask.txt");
 }
 
@@ -13,13 +25,15 @@ FileLoader::~FileLoader() { file_.close(); }
 bool FileLoader::saveTask(const QString &task_name, const QString &deadline,
                           const QString &task_overwrite) {
   QDate date = QDate::fromString(deadline, "dd.MM.yyyy");
-  if (date.isValid()) {
+  if ((date.isValid()) && (!task_name.isEmpty()) &&
+      (!task_overwrite.isEmpty())) {
     QTextStream in_file(&file_);
     in_file << '\n'
             << task_name << '\n'
             << deadline << '\n'
             << task_overwrite << '\n'
             << "__End_task__";
+    m_number_tasks++;
     return true;
   } else
     return false;
@@ -91,4 +105,7 @@ QString FileLoader::getTask() {
   qDebug() << name;
   lt.close();
   return name;
+}
+QString FileLoader::getNumberTasks() {
+  return (QString::number(m_number_tasks));
 }

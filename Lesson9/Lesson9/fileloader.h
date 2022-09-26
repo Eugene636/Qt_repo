@@ -8,6 +8,7 @@
 
 class FileLoader : public QObject {
   Q_OBJECT
+  Q_PROPERTY(QString number_tasks READ getNumberTasks)
 public:
   FileLoader(QObject *parent = 0);
   Q_INVOKABLE
@@ -21,6 +22,8 @@ public:
   Q_INVOKABLE
   void writeTask(const QString &, const QString &, const QString &);
   ~FileLoader();
+  int m_number_tasks;
+  QString getNumberTasks();
 
 private:
   QFile file_;
