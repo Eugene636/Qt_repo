@@ -4,15 +4,14 @@ import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.3
 import com.fileloader 1.0
 
-Window {
+Rectangle {
     width: 640
     height: 480
     visible: true
-    title: qsTr("Task schedules")
-
-
+    id: mainRectangle
 TextArea {
     id: task_name
+    objectName: "task_name"
     anchors.left: parent.left
     anchors.right: write_button.left
     y:20
@@ -42,9 +41,11 @@ Button {
         color: "red"
         Text {
         id: button_text
-        anchors.left: parent.left
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.horizontalCenter: parent.horizontalCenter
         text: "write"
         }
+        border.color: "black"
     }
     onClicked: {
     if (loader.saveTask (task_name.text, deadline.text, overwrite.text)) {
@@ -73,15 +74,39 @@ Button {
         color: "blue"
         Text {
         id: new_button_text
-        anchors.left: parent.left
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.horizontalCenter: parent.horizontalCenter
         text: "reset"
         }
+        border.color: "black"
     }
     onClicked: {
     task_name.clear()
     deadline.clear()
     overwrite.clear()
     }
+}
+Button {
+    signal viewSignal()
+    id: tasksView
+    objectName: "tasksView"
+    anchors.right: parent.right
+    anchors.top: new_task.bottom
+    width: 40
+    height: 50
+    x: 600
+    background: Rectangle {
+        anchors.fill: parent
+        color: "blue"
+        Text {
+        id: tasks_view_text
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.horizontalCenter: parent.horizontalCenter
+        text: "view"
+        }
+    border.color: "black"
+    }
+    onClicked: viewSignal()
 }
 Text {
     id: deadline_sign
@@ -94,8 +119,9 @@ Text {
 
 TextArea {
     id: number_tasks
+    objectName: "number_tasks"
     anchors.right: parent.right
-    anchors.top: new_task.bottom
+    anchors.top: tasksView.bottom
     width: 40
     height: 50
     x: 600
@@ -108,6 +134,7 @@ TextArea {
 
 TextArea {
     id: deadline
+    objectName: "deadline"
     width: task_name.width
     height: 40
     y: 80
@@ -119,6 +146,7 @@ TextArea {
 }
 FileLoader {
     id: loader
+    objectName: "loader"
 }
 Text {
     id: overwrite_sign
@@ -131,6 +159,7 @@ Text {
 
 TextArea {
     id: overwrite
+    objectName: "task_abstract"
     width: task_name.width
     height: 110
     y: 140
@@ -150,11 +179,6 @@ TextArea {
        color: "bisque"
     }
 
-}
-onClosing: {
-      close.accepted = false
-      loader.writeTask(task_name.text, deadline.text, overwrite.text)
-      close.accepted = true
 }
 
 }

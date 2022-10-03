@@ -1,5 +1,7 @@
+QT += sql
 QT += quick \
-    widgets
+    widgets\
+    quickwidgets
 
 CONFIG += c++11
 
@@ -9,7 +11,9 @@ CONFIG += c++11
 
 SOURCES += \
         fileloader.cpp \
-        main.cpp
+        main.cpp \
+        organaizer.cpp \
+        tableview.cpp
 
 RESOURCES += qml.qrc
 
@@ -25,4 +29,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    fileloader.h
+    fileloader.h \
+    organaizer.h \
+    tableview.h
+
+FORMS +=

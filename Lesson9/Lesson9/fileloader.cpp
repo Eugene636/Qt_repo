@@ -1,39 +1,54 @@
 #include "fileloader.h"
 #include <QDate>
 #include <QDebug>
+#include <QSqlQuery>
 
 FileLoader::FileLoader(QObject *parent) {
-  file_.setFileName("Tasks.txt");
-  file_.open(QIODevice::ReadOnly);
-  QTextStream txt(&file_);
   m_number_tasks = 0;
-  QString s;
-  while (!txt.atEnd()) {
-    txt >> s;
-    if (s == "__End_task__")
-      m_number_tasks++;
+  db_ = QSqlDatabase::addDatabase("QSQLITE");
+  db_.setDatabaseName("Tasks.sqlite");
+  if (!db_.open()) {
+    qDebug() << "Database not open";
   }
-  file_.close();
-  file_.setFileName("Tasks.txt");
-  file_.open(QIODevice::Append);
-
-  // last_task_file_.setFileName("LastTask.txt");
+  QSqlQuery query;
+  if (!query.exec(
+          "create table if not exists Tasks(id integer "
+          "primary key,TaskName "
+          "varchar(100),Data varchar(16),TaskAbstract varchar(1024))")) {
+    qDebug() << "Work table does not create";
+  }
+  if (!query.exec(
+          "create table if not exists BackUp(TaskName "
+          "varchar(100),Data varchar(16),TaskAbstract varchar(1024))")) {
+    qDebug() << "Backup table does not create";
+  }
+  query.exec("select MAX (id) from Tasks");
+  query.next();
+  bool ok;
+  int k = query.value(0).toInt(&ok);
+  if (ok)
+    m_number_tasks = k;
 }
 
-FileLoader::~FileLoader() { file_.close(); }
+FileLoader::~FileLoader() { db_.close(); }
 
 bool FileLoader::saveTask(const QString &task_name, const QString &deadline,
                           const QString &task_overwrite) {
   QDate date = QDate::fromString(deadline, "dd.MM.yyyy");
   if ((date.isValid()) && (!task_name.isEmpty()) &&
       (!task_overwrite.isEmpty())) {
-    QTextStream in_file(&file_);
-    in_file << '\n'
-            << task_name << '\n'
-            << deadline << '\n'
-            << task_overwrite << '\n'
-            << "__End_task__";
+    QSqlQuery query;
     m_number_tasks++;
+    QString query_string = "INSERT INTO Tasks VALUES(";
+    query_string += QString::number(m_number_tasks) + ", ";
+    query_string += "\'" + task_name + "\'" + ", ";
+    query_string += "\'" + deadline + "\', ";
+    query_string += "\'" + task_overwrite + "\'";
+    query_string += ")";
+    if (!query.exec(query_string)) {
+      qDebug() << "Insert task failed";
+    }
+    emit dbRenew();
     return true;
   } else
     return false;
@@ -41,70 +56,41 @@ bool FileLoader::saveTask(const QString &task_name, const QString &deadline,
 
 void FileLoader::writeTask(const QString &name, const QString &deadline,
                            const QString &task) {
-  QFile lt("LastTask.txt");
-  lt.open(QIODevice::WriteOnly | QIODevice::Truncate);
-  QTextStream in_file(&lt);
-  in_file << "__Task_Name:__" << '\n' << name << '\n';
-  in_file << "__Deadline:__" << '\n' << deadline << '\n';
-  in_file << "__Task:__" << '\n' << task << '\n';
+  QSqlQuery query;
+  if (!query.exec("DELETE from BackUp")) {
+    qDebug() << "Not Deleted";
+  }
+  QString query_string = "INSERT INTO BackUp VALUES(";
+  query_string += "\'" + name + "\'" + ", ";
+  query_string += "\'" + deadline + "\', ";
+  query_string += "\'" + task + "\'";
+  query_string += ")";
+  query.exec(query_string);
 }
 
 QString FileLoader::getTaskName() {
-  QFile lt("LastTask.txt");
-  lt.open(QIODevice::ReadOnly);
-  QTextStream out_file(&lt);
-  QString s;
-  while ((s != "__Task_Name:__") && (!out_file.atEnd())) {
-    qDebug() << s;
-    out_file >> s;
-  }
   QString name;
-  for (out_file >> s;
-       (s != "__Deadline:__") && (s != "__Task:__") && (!out_file.atEnd());
-       out_file >> s) {
-    name += s;
-  }
-  qDebug() << name;
-  lt.close();
+  QSqlQuery query;
+  query.exec("SELECT TaskName FROM BackUp");
+  query.next();
+  name = query.value(0).toString();
   return name;
 }
 QString FileLoader::getDeadline() {
-  QFile lt("LastTask.txt");
-  lt.open(QIODevice::ReadOnly);
-  QTextStream out_file(&lt);
-  QString s;
-  while ((s != "__Deadline:__") && (!out_file.atEnd())) {
-    qDebug() << s;
-    out_file >> s;
-  }
-  QString name;
-  for (out_file >> s;
-       (s != "__Task_Name:__") && (s != "__Task:__") && (!out_file.atEnd());
-       out_file >> s) {
-    name += s;
-  }
-  qDebug() << name;
-  lt.close();
-  return name;
+  QString date;
+  QSqlQuery query;
+  query.exec("SELECT Data FROM BackUp");
+  query.next();
+  date = query.value(0).toString();
+  return date;
 }
 QString FileLoader::getTask() {
-  QFile lt("LastTask.txt");
-  lt.open(QIODevice::ReadOnly);
-  QTextStream out_file(&lt);
-  QString s;
-  while ((s != "__Task:__") && (!out_file.atEnd())) {
-    qDebug() << s;
-    out_file >> s;
-  }
-  QString name;
-  for (out_file >> s;
-       (s != "__Deadline:__") && (s != "__Task_Name:__") && (!out_file.atEnd());
-       out_file >> s) {
-    name += s;
-  }
-  qDebug() << name;
-  lt.close();
-  return name;
+  QString Task;
+  QSqlQuery query;
+  query.exec("SELECT TaskAbstract FROM BackUp");
+  query.next();
+  Task = query.value(0).toString();
+  return Task;
 }
 QString FileLoader::getNumberTasks() {
   return (QString::number(m_number_tasks));
