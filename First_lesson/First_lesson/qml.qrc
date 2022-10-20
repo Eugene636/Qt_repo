@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>Firstask.qml</file>
+        <file>SecondTask.qml</file>
+        <file>Coordinate.qml</file>
+    </qresource>
+</RCC>
